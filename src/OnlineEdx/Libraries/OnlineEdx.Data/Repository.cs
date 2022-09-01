@@ -1,9 +1,8 @@
 ﻿using NHibernate;
 using OnlineEdx.Data;
-using OnlineEdx.Infrastructure.SessionFactories;
 using System.Linq.Expressions;
 
-namespace OnlineEdx.Infrastructure.Repositories
+namespace OnlineEdx.Data
 {
     public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {

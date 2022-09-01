@@ -11,13 +11,13 @@ namespace OnlineEdx.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly CourseService _courseService;
+        private readonly ICourseService _courseService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+            ICourseService courseService)
         {
             _logger = logger;
-            var context = new MsSQLSessionFactory();
-            _courseService = new CourseService(context);
+            _courseService = courseService;
         }
 
         public IActionResult Index()

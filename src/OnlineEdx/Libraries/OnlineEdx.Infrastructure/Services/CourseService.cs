@@ -1,5 +1,4 @@
 ﻿using OnlineEdx.Infrastructure.Entities;
-using OnlineEdx.Infrastructure.SessionFactories;
 using OnlineEdx.Infrastructure.UnitOfWorks;
 using System.Linq.Expressions;
 
@@ -7,11 +6,11 @@ namespace OnlineEdx.Infrastructure.Services
 {
     public class CourseService : ICourseService
     {
-        private readonly UnitOfWork _edxUnitOfWork;
+        private readonly IEdxUnitOfWork _edxUnitOfWork;
 
-        public CourseService(MsSQLSessionFactory factory)
+        public CourseService(IEdxUnitOfWork unitOfWork)
         {
-            _edxUnitOfWork = new UnitOfWork(factory);
+            _edxUnitOfWork = unitOfWork;
         }
         public void Add(Course course)
         {

@@ -1,10 +1,7 @@
-﻿using OnlineEdx.Infrastructure.Repositories;
-
-namespace OnlineEdx.Infrastructure.UnitOfWorks
+﻿namespace OnlineEdx.Data
 {
     public interface IUnitOfWork : IDisposable
     {
-        ICourseRepository CourseRepository { get; }
         void SaveChanges();
         void BeginTransaction();
         void CommitTransaction();
