@@ -18,7 +18,7 @@ namespace OnlineEdx.Infrastructure.SessionFactories
         {
             Session = Fluently
                 .Configure()
-                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(@"Server=.\SQLEXPRESS;Database=cqrsDB;Trusted_Connection=True;"))
+                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(@"Server=.\SQLEXPRESS;Database=EdxDB;Trusted_Connection=True;"))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<MsSQLSessionFactory>())
                 .BuildSessionFactory();
         }

@@ -7,8 +7,8 @@ namespace OnlineEdx.Infrastructure.Mapping
     {
         public CourseMap()
         {
-            Table("Courses");
-            Id(x => x.Id).GeneratedBy.Identity();
+            Table("CoursesN");
+            Id(x => x.Id).Column("Id");
             Map(x => x.Title);
             Map(x => x.Description);
             Map(x => x.Image);

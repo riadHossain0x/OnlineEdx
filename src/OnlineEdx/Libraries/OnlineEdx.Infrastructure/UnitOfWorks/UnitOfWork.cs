@@ -1,16 +1,22 @@
 ﻿using NHibernate;
+using OnlineEdx.Data;
+using OnlineEdx.Infrastructure.Repositories;
+using OnlineEdx.Infrastructure.SessionFactories;
 
-namespace OnlineEdx.Data
+namespace OnlineEdx.Infrastructure.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {
         private ISession _session;
         private ITransaction _transaction = null!;
 
-        public UnitOfWork(IDataSessionFactory session)
+        public UnitOfWork(MsSQLSessionFactory session)
         {
             _session = session.OpenSession();
+            CourseRepository = new CourseRepository(_session);
         }
+
+        public ICourseRepository CourseRepository { get;}
 
         public void SaveChanges()
         {

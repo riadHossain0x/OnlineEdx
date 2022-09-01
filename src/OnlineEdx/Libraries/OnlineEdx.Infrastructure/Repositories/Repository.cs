@@ -1,15 +1,17 @@
 ﻿using NHibernate;
+using OnlineEdx.Data;
+using OnlineEdx.Infrastructure.SessionFactories;
 using System.Linq.Expressions;
 
-namespace OnlineEdx.Data
+namespace OnlineEdx.Infrastructure.Repositories
 {
     public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {
         private readonly ISession _session;
 
-        public Repository(IDataSessionFactory session)
+        public Repository(ISession session)
         {
-            _session = session.OpenSession();
+            _session = session;
         }
 
         public TEntity Get(int id)
@@ -29,7 +31,7 @@ namespace OnlineEdx.Data
 
         public void Add(TEntity entity)
         {
-            _session.SaveOrUpdate(entity);
+            _session.SaveAsync(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)

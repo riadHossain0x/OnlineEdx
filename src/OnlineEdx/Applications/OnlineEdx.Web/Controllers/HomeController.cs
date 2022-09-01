@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NHibernate;
 using OnlineEdx.Infrastructure.Entities;
 using OnlineEdx.Infrastructure.Services;
+using OnlineEdx.Infrastructure.SessionFactories;
 using OnlineEdx.Web.Models;
 using System.Diagnostics;
 
@@ -9,20 +11,20 @@ namespace OnlineEdx.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICourseService _courseService;
+        private readonly CourseService _courseService;
 
-        public HomeController(ILogger<HomeController> logger, 
-            ICourseService courseService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _courseService = courseService;
+            var context = new MsSQLSessionFactory();
+            _courseService = new CourseService(context);
         }
 
         public IActionResult Index()
         {
             var course = new Course
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Title = "Asp.Net Core",
                 Description = "Beginner friendly course",
                 Image = "Default.jpg",
