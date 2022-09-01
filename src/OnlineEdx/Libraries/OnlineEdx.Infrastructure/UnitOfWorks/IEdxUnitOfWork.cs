@@ -1,13 +1,10 @@
 ﻿using OnlineEdx.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OnlineEdx.Infrastructure.Repositories;
 
 namespace OnlineEdx.Infrastructure.UnitOfWorks
 {
     public interface IEdxUnitOfWork : IUnitOfWork
     {
+        ICourseRepository CourseRepository { get; set; }
     }
 }

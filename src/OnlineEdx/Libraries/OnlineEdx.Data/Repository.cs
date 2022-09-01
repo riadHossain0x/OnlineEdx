@@ -3,13 +3,13 @@ using System.Linq.Expressions;
 
 namespace OnlineEdx.Data
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {
         private readonly ISession _session;
 
-        public Repository(ISession session)
+        public Repository(IDataSessionFactory session)
         {
-            _session = session;
+            _session = session.OpenSession();
         }
 
         public TEntity Get(int id)
