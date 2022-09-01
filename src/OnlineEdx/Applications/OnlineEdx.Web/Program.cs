@@ -1,5 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using NHibernate.AspNetCore.Identity;
+using NHibernate.Cfg;
+using OnlineEdx.Membership;
 using OnlineEdx.Web;
 using Serilog;
 using Serilog.Events;
@@ -11,6 +14,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new WebModule());
+    containerBuilder.RegisterModule(new MembershipModule());
 });
 
 //Serilog configuration
