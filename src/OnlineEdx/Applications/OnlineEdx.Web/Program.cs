@@ -1,5 +1,7 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore;
 using NHibernate.AspNetCore.Identity;
 using NHibernate.Cfg;
 using OnlineEdx.Membership;
@@ -23,6 +25,10 @@ builder.Host.UseSerilog((ctx, lc) => lc
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .Enrich.FromLogContext()
     .ReadFrom.Configuration(builder.Configuration));
+
+//builder.Services.AddDefaultIdentity<WebTest.Entities.AppUser>()
+//            .AddRoles<WebTest.Entities.AppRole>()
+//            .AddHibernateStores();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

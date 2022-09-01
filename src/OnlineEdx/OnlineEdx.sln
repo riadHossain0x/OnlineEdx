@@ -9,13 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{46354E56-560A-49A8-8D85-1F9D5463E723}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEdx.Web", "Applications\OnlineEdx.Web\OnlineEdx.Web.csproj", "{1540E5F1-1217-4160-9FA6-04478271D3CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEdx.Web", "Applications\OnlineEdx.Web\OnlineEdx.Web.csproj", "{1540E5F1-1217-4160-9FA6-04478271D3CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEdx.Infrastructure", "Libraries\OnlineEdx.Infrastructure\OnlineEdx.Infrastructure.csproj", "{900FB9C7-354B-49DC-B810-D46B3712CA96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEdx.Infrastructure", "Libraries\OnlineEdx.Infrastructure\OnlineEdx.Infrastructure.csproj", "{900FB9C7-354B-49DC-B810-D46B3712CA96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEdx.Data", "Libraries\OnlineEdx.Data\OnlineEdx.Data.csproj", "{8675844D-A9B1-4052-AB7D-321AC1D4F90C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineEdx.Data", "Libraries\OnlineEdx.Data\OnlineEdx.Data.csproj", "{8675844D-A9B1-4052-AB7D-321AC1D4F90C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online.Edx.Infrastructure.Tests", "Tests\Online.Edx.Infrastructure.Tests\Online.Edx.Infrastructure.Tests.csproj", "{EB92BADD-FDAA-4D51-8F9C-7A4266DA1EB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online.Edx.Infrastructure.Tests", "Tests\Online.Edx.Infrastructure.Tests\Online.Edx.Infrastructure.Tests.csproj", "{EB92BADD-FDAA-4D51-8F9C-7A4266DA1EB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEdx.Membership", "Libraries\OnlineEdx.Membership\OnlineEdx.Membership.csproj", "{EBE86792-26DB-4C2D-BB9A-038C8266670F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EB92BADD-FDAA-4D51-8F9C-7A4266DA1EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB92BADD-FDAA-4D51-8F9C-7A4266DA1EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB92BADD-FDAA-4D51-8F9C-7A4266DA1EB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE86792-26DB-4C2D-BB9A-038C8266670F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE86792-26DB-4C2D-BB9A-038C8266670F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE86792-26DB-4C2D-BB9A-038C8266670F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE86792-26DB-4C2D-BB9A-038C8266670F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{900FB9C7-354B-49DC-B810-D46B3712CA96} = {5E5AB328-4058-4920-ACC8-9E982DF7A4E9}
 		{8675844D-A9B1-4052-AB7D-321AC1D4F90C} = {5E5AB328-4058-4920-ACC8-9E982DF7A4E9}
 		{EB92BADD-FDAA-4D51-8F9C-7A4266DA1EB3} = {46354E56-560A-49A8-8D85-1F9D5463E723}
+		{EBE86792-26DB-4C2D-BB9A-038C8266670F} = {5E5AB328-4058-4920-ACC8-9E982DF7A4E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05D90979-B8A3-40D0-ADDC-1027F7503485}

@@ -12,9 +12,9 @@ namespace OnlineEdx.Infrastructure.DbContexts
         private readonly ISessionFactory sessionFactory;
         public AppDbContext()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["default"].ConnectionString;
+            var connectionString = "Server=.\\SQLEXPRESS;Database=cqrsDB;Trused_Connection=true;";//ConfigurationManager.ConnectionStrings["default"].ConnectionString;
             sessionFactory = Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connectionString))
+                .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<AppDbContext>())
                 .BuildSessionFactory();
         }
