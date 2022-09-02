@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluentNHibernate.AspNetCore.Identity;
 
 namespace OnlineEdx.Infrastructure.Entities.Membership
 {

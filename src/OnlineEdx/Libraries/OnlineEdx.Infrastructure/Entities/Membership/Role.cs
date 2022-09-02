@@ -1,8 +1,8 @@
-﻿using NHIdentityRole = NHibernate.AspNetCore.Identity.IdentityRole;
+﻿using FluentNHibernate.AspNetCore.Identity;
 
 namespace OnlineEdx.Infrastructure.Entities.Membership
 {
-    public class Role : NHIdentityRole
+    public class Role : IdentityRole
     {
         public Role()
            : base()

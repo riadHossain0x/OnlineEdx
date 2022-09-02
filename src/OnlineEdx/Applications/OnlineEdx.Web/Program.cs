@@ -1,15 +1,16 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore;
-using NHibernate.AspNetCore.Identity;
-using NHibernate.Cfg;
 using OnlineEdx.Membership;
 using OnlineEdx.Infrastructure;
 using OnlineEdx.Web;
 using Serilog;
 using Serilog.Events;
-using OnlineEdx.Infrastructure.Entities.Membership;
+using OnlineEdx.Infrastructure.SessionFactories;
+using FluentNHibernate.AspNetCore.Identity;
+using FluentNHibernate.AspNetCore.Identity.Mappings;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,12 +32,19 @@ builder.Host.UseSerilog((ctx, lc) => lc
 
 //Automapper configuration
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddMvc().AddSessionStateTempDataProvider();
-builder.Services.AddSession();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>()
-            .AddRoles<Role>()
-            .AddHibernateStores();
+//Fluently.Configure()
+//    .Database()
+//    .Mappings(t =>
+//    {
+//        t.FluentMappings.AddFromAssembly(typeof(InfrastructureModule).Assembly);
+//    });
+
+builder.Services.AddScoped(t => new MsSQLSessionFactory().OpenSession());
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .ExtendConfiguration()
+    .AddNHibernateStores(t => t.SetSessionAutoFlush(true));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -8,9 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Fluent.NHibernate.AspNetCore.Identity" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.8" />
-    <PackageReference Include="NHibernate" Version="5.3.13" />
-    <PackageReference Include="NHibernate.AspNetCore.Identity" Version="6.0.10" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
   </ItemGroup>
 

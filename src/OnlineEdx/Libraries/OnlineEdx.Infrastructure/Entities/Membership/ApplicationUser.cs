@@ -1,9 +1,11 @@
-﻿using NHIdentityUser = NHibernate.AspNetCore.Identity.IdentityUser;
+﻿
+using FluentNHibernate.AspNetCore.Identity;
 
 namespace OnlineEdx.Infrastructure.Entities.Membership
 {
-    public class ApplicationUser : NHIdentityUser
+    public class ApplicationUser : IdentityUser<Guid>
     {
-        public string Image { get; set; } = null!;
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
     }
 }

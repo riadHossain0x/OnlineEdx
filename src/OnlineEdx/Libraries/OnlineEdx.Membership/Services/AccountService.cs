@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.WebUtilities;
@@ -9,6 +8,7 @@ using OnlineEdx.Infrastructure.Entities.Membership;
 using SignInResult =  Microsoft.AspNetCore.Identity.SignInResult;
 using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.ApplicationUser;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace OnlineEdx.Membership.Services
 {
