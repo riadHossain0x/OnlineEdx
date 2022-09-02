@@ -5,17 +5,20 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Security.Claims;
 using System.Text;
 using OnlineEdx.Infrastructure.Entities.Membership;
-using SignInResult =  Microsoft.AspNetCore.Identity.SignInResult;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.ApplicationUser;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using NHibernate;
+using OnlineEdx.Data;
 
 namespace OnlineEdx.Membership.Services
 {
-    public class AccountService : IAccountService
+    public class AccountService : IAccountService, IDisposable
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private ISession _session;
         private readonly IUrlHelper _urlHelper;
         private readonly IActionContextAccessor _contextAccessor;
         private readonly IMapper _mapper;
@@ -24,13 +27,14 @@ namespace OnlineEdx.Membership.Services
             SignInManager<ApplicationUser> signInManager,
             IUrlHelperFactory urlHelperFactory,
             IActionContextAccessor contextAccessor,
-            IMapper mapper)
+            IMapper mapper, ISession session)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _urlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext);
+            _urlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext!);
             _contextAccessor = contextAccessor;
             _mapper = mapper;
+            _session = session;
         }
         public async Task ClaimAsync(ApplicationUser user)
         {
@@ -61,16 +65,26 @@ namespace OnlineEdx.Membership.Services
 
         public async Task<IdentityResult> CreateUserAsync(ApplicationUserBO user)
         {
-            var userEntity = _mapper.Map<ApplicationUser>(user);
-            var result = await _userManager.CreateAsync(userEntity, user.Password);
-
-            if (result.Succeeded)
+            try
             {
-                await RolesAsync(userEntity);
-                await GenerateEmailConfirmationTokenAsync(userEntity);
-            }
+                var userEntity = _mapper.Map<ApplicationUser>(user);
+                _session.Save(await _userManager.CreateAsync(userEntity, user.Password));
 
-            return result;
+                //var result = await _userManager.CreateAsync(userEntity, user.Password);
+
+                //if (result.Succeeded)
+                //{
+                //    await RolesAsync(userEntity);
+                //    await GenerateEmailConfirmationTokenAsync(userEntity);
+                //}
+
+                return null!;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
@@ -133,14 +147,14 @@ namespace OnlineEdx.Membership.Services
 
         public async Task<SignInResult> PasswordSignInAsync(ApplicationUserBO user)
         {
-            return await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, 
+            return await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe,
                 lockoutOnFailure: false);
         }
 
         public async Task<IdentityResult> ResetPasswordAsync(ApplicationUserBO user)
         {
             return await _userManager.ResetPasswordAsync
-                (await _userManager.FindByIdAsync(user.Id), user.Code, user.NewPassword);
+                (await _userManager.FindByIdAsync(user.Id.ToString()), user.Code, user.NewPassword);
         }
 
         public async Task RolesAsync(ApplicationUser user)
@@ -166,6 +180,11 @@ namespace OnlineEdx.Membership.Services
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public void Dispose()
+        {
+            _session.Dispose();
         }
     }
 }

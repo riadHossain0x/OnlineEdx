@@ -32,9 +32,7 @@ builder.Host.UseSerilog((ctx, lc) => lc
 //Automapper configuration
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddTransient<IAccountService, AccountService>();
-
-builder.Services.AddScoped(t => new MsSQLSessionFactory().OpenSession());
+builder.Services.AddTransient(t => new MsSQLSessionFactory().OpenSession());
 builder.Services.AddIdentityCore<ApplicationUser>()
     .AddRoles<Role>()
     .ExtendConfiguration()
