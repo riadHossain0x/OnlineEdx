@@ -11,10 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using NHibernate;
 using OnlineEdx.Data;
+using NHibernate.Id.Insert;
 
 namespace OnlineEdx.Membership.Services
 {
-    public class AccountService : IAccountService, IDisposable
+    public class AccountService : IAccountService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -63,28 +64,12 @@ namespace OnlineEdx.Membership.Services
             return result;
         }
 
-        public async Task<IdentityResult> CreateUserAsync(ApplicationUserBO user)
+        public async Task<object> CreateUserAsync(ApplicationUserBO user)
         {
-            try
-            {
-                var userEntity = _mapper.Map<ApplicationUser>(user);
-                _session.Save(await _userManager.CreateAsync(userEntity, user.Password));
+            var userEntity = _mapper.Map<ApplicationUser>(user);
+            var result = _session.Save(await _userManager.CreateAsync(userEntity, user.Password));
+            return result;
 
-                //var result = await _userManager.CreateAsync(userEntity, user.Password);
-
-                //if (result.Succeeded)
-                //{
-                //    await RolesAsync(userEntity);
-                //    await GenerateEmailConfirmationTokenAsync(userEntity);
-                //}
-
-                return null!;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
         }
 
         public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
@@ -101,7 +86,7 @@ namespace OnlineEdx.Membership.Services
                 userId = user.Id,
                 code = code,
             },
-            protocol: _contextAccessor.ActionContext.HttpContext.Request.Scheme);
+            protocol: _contextAccessor.ActionContext!.HttpContext.Request.Scheme);
 
             await SendEmailConfirmationEmail(callbackUrl, user.Email);
         }
@@ -116,9 +101,9 @@ namespace OnlineEdx.Membership.Services
                     "ResetPassword",
                     "Account",
                     values: new { userid = user.Id, code },
-                    protocol: _contextAccessor.ActionContext.HttpContext.Request.Scheme);
+                    protocol: _contextAccessor.ActionContext!.HttpContext.Request.Scheme);
 
-                await SendForgotPasswordEmail(callbackUrl, user.Email);
+                await SendForgotPasswordEmail(callbackUrl!, user.Email);
             }
         }
 
@@ -138,7 +123,7 @@ namespace OnlineEdx.Membership.Services
         {
             return GetUser!.FindFirstValue(ClaimTypes.NameIdentifier);
         }
-        public ClaimsPrincipal GetUser => _contextAccessor.ActionContext.HttpContext.User;
+        public ClaimsPrincipal GetUser => _contextAccessor.ActionContext!.HttpContext.User;
 
         public bool IsAuthenticated()
         {
@@ -180,11 +165,6 @@ namespace OnlineEdx.Membership.Services
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
-        }
-
-        public void Dispose()
-        {
-            _session.Dispose();
         }
     }
 }
