@@ -9,6 +9,7 @@ using OnlineEdx.Infrastructure;
 using OnlineEdx.Web;
 using Serilog;
 using Serilog.Events;
+using OnlineEdx.Infrastructure.Entities.Membership;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +29,14 @@ builder.Host.UseSerilog((ctx, lc) => lc
     .Enrich.FromLogContext()
     .ReadFrom.Configuration(builder.Configuration));
 
-//builder.Services.AddDefaultIdentity<WebTest.Entities.AppUser>()
-//            .AddRoles<WebTest.Entities.AppRole>()
-//            .AddHibernateStores();
+//Automapper configuration
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddMvc().AddSessionStateTempDataProvider();
+builder.Services.AddSession();
+
+builder.Services.AddDefaultIdentity<ApplicationUser>()
+            .AddRoles<Role>()
+            .AddHibernateStores();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

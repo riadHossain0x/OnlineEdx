@@ -13,7 +13,7 @@ namespace OnlineEdx.Membership.Services
         Task SendForgotPasswordEmail(string callbackUrl, string email);
         Task<IdentityResult> ConfirmEmailAsync(string userId, string code);
         Task<ApplicationUser> GetUserByEmailAsync(string email);
-        Task<SignInResult> PasswordSignInAsync(ApplicationUserBO model);
+        Task<SignInResult> PasswordSignInAsync(ApplicationUserBO user);
         Task<IList<string>> GetCurrentUserRolesAsync(string email);
         Task RolesAsync(ApplicationUser user);
         Task ClaimAsync(ApplicationUser user);
@@ -22,6 +22,6 @@ namespace OnlineEdx.Membership.Services
         bool IsAuthenticated();
         string GetUserId();
         Task GenerateForgotPasswordTokenAsync(ApplicationUser user);
-        Task<IdentityResult> ResetPasswordAsync(ApplicationUserBO model);
+        Task<IdentityResult> ResetPasswordAsync(ApplicationUserBO user);
     }
 }

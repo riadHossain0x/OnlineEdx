@@ -9,7 +9,6 @@ using OnlineEdx.Infrastructure.Entities.Membership;
 using SignInResult =  Microsoft.AspNetCore.Identity.SignInResult;
 using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.ApplicationUser;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace OnlineEdx.Membership.Services
 {
@@ -132,9 +131,9 @@ namespace OnlineEdx.Membership.Services
             return GetUser!.Identity!.IsAuthenticated;
         }
 
-        public async Task<SignInResult> PasswordSignInAsync(ApplicationUserBO model)
+        public async Task<SignInResult> PasswordSignInAsync(ApplicationUserBO user)
         {
-            return await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, 
+            return await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, 
                 lockoutOnFailure: false);
         }
 
