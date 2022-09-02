@@ -64,12 +64,15 @@ namespace OnlineEdx.Membership.Services
             return result;
         }
 
-        public async Task<object> CreateUserAsync(ApplicationUserBO user)
+        public async Task<IdentityResult> CreateUserAsync(ApplicationUserBO user)
         {
             var userEntity = _mapper.Map<ApplicationUser>(user);
-            var result = _session.Save(await _userManager.CreateAsync(userEntity, user.Password));
+            var result = await _userManager.CreateAsync(userEntity, user.Password);
+            if (result.Succeeded)
+            {
+                //await RolesAsync(userEntity);
+            }
             return result;
-
         }
 
         public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
@@ -88,7 +91,7 @@ namespace OnlineEdx.Membership.Services
             },
             protocol: _contextAccessor.ActionContext!.HttpContext.Request.Scheme);
 
-            await SendEmailConfirmationEmail(callbackUrl, user.Email);
+            await SendEmailConfirmationEmail(callbackUrl!, user.Email);
         }
 
         public async Task GenerateForgotPasswordTokenAsync(ApplicationUser user)

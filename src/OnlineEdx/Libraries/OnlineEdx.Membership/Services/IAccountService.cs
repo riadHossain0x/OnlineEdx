@@ -6,7 +6,7 @@ namespace OnlineEdx.Membership.Services
 {
     public interface IAccountService
     {
-        Task<object> CreateUserAsync(ApplicationUserBO user);
+        Task<IdentityResult> CreateUserAsync(ApplicationUserBO user);
         Task<IdentityResult> CreateExternalUserAsync(ApplicationUser user);
         Task GenerateEmailConfirmationTokenAsync(ApplicationUser user);
         Task SendEmailConfirmationEmail(string callbackUrl, string email);
