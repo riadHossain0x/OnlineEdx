@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\OnlineEdx.Infrastructure\OnlineEdx.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Libraries\OnlineEdx.Membership\OnlineEdx.Membership.csproj" />
   </ItemGroup>
 

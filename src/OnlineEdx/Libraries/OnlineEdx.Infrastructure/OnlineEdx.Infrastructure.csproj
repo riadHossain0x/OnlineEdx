@@ -18,6 +18,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineEdx.Membership\OnlineEdx.Membership.csproj" />
+    <ProjectReference Include="..\OnlineEdx.Data\OnlineEdx.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BusinessObjects\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

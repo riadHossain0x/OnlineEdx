@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineEdx.Infrastructure.Services;
 using OnlineEdx.Web.Models;
 using System.Diagnostics;
 
@@ -11,7 +12,6 @@ namespace OnlineEdx.Web.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _logger.LogInformation("Running well");
         }
 
         public IActionResult Index()

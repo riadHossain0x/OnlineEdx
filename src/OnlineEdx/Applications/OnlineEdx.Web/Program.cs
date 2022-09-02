@@ -5,6 +5,7 @@ using Microsoft.AspNetCore;
 using NHibernate.AspNetCore.Identity;
 using NHibernate.Cfg;
 using OnlineEdx.Membership;
+using OnlineEdx.Infrastructure;
 using OnlineEdx.Web;
 using Serilog;
 using Serilog.Events;
@@ -17,6 +18,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new WebModule());
     containerBuilder.RegisterModule(new MembershipModule());
+    containerBuilder.RegisterModule(new InfrastructureModule());
 });
 
 //Serilog configuration
