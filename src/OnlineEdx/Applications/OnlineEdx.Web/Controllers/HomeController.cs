@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineEdx.Infrastructure.BusinessObjects;
 using OnlineEdx.Membership.Services;
 using OnlineEdx.Web.Models;
 using System.Diagnostics;
@@ -19,6 +20,12 @@ namespace OnlineEdx.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var user = new ApplicationUser
+            {
+                Email = "riad@gmail.com",
+                Password = "Riad.00"
+            };
+            var result = await _accountService.PasswordSignInAsync(user);
             return View();
         }
 
