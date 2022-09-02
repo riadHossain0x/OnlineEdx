@@ -8,8 +8,11 @@ namespace OnlineEdx.Infrastructure.UnitOfWorks
         public EdxUnitOfWork(IDataSessionFactory session) : base(session)
         {
             CourseRepository = new CourseRepository(_session);
+            CategoryRepository = new CategoryRepository(_session);
         }
 
         public ICourseRepository CourseRepository { get; }
+
+        public ICategoryRepository CategoryRepository { get; }
     }
 }

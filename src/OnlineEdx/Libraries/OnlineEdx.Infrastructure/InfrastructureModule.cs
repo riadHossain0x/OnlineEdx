@@ -11,13 +11,17 @@ namespace OnlineEdx.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<CourseService>().As<ICourseService>()
-                .InstancePerLifetimeScope();
             builder.RegisterType<MsSQLSessionFactory>().As<IDataSessionFactory>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<EdxUnitOfWork>().As<IEdxUnitOfWork>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<CourseService>().As<ICourseService>()
+                .InstancePerLifetimeScope();
             builder.RegisterType<CourseRepository>().As<ICourseRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<CategoryService>().As<ICategoryService>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
                 .InstancePerLifetimeScope();
             base.Load(builder);
         }

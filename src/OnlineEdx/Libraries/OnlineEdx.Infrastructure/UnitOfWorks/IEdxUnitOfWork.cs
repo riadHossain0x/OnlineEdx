@@ -11,5 +11,6 @@ namespace OnlineEdx.Infrastructure.UnitOfWorks
     public interface IEdxUnitOfWork : IUnitOfWork
     {
         ICourseRepository CourseRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
     }
 }

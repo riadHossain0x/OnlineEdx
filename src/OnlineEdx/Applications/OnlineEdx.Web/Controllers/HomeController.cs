@@ -4,6 +4,7 @@ using OnlineEdx.Infrastructure.Entities;
 using OnlineEdx.Infrastructure.Services;
 using OnlineEdx.Infrastructure.SessionFactories;
 using OnlineEdx.Web.Models;
+using System;
 using System.Diagnostics;
 
 namespace OnlineEdx.Web.Controllers
@@ -11,32 +12,19 @@ namespace OnlineEdx.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICourseService _courseService;
 
-        public HomeController(ILogger<HomeController> logger, 
-            ICourseService courseService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _courseService = courseService;
         }
 
         public IActionResult Index()
         {
-            var course = new Course
-            {
-                Id = Guid.NewGuid(),
-                Title = "Asp.Net Core",
-                Description = "Beginner friendly course",
-                Image = "Default.jpg",
-                PreviewVideo = "http://youtube.com/videos"
-            };
-            _courseService.Add(course);
             return View();
         }
 
         public IActionResult Privacy()
         {
-            var courses = _courseService.GetAll();
             return View();
         }
 

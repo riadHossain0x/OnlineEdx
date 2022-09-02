@@ -14,12 +14,9 @@ namespace OnlineEdx.Infrastructure.Services
         Course Get(int id);
         IQueryable<Course> GetAll();
         IQueryable<Course> Find(Expression<Func<Course, bool>> predicate);
-
         void Add(Course category);
         void AddRange(IEnumerable<Course> entities);
-
         void Update(Course entity);
-
         void Remove(Course entity);
         void RemoveRange(IEnumerable<Course> entities);
     }

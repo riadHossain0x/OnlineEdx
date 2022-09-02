@@ -7,12 +7,13 @@ namespace OnlineEdx.Infrastructure.Mapping
     {
         public CourseMap()
         {
-            Table("CoursesN");
-            Id(x => x.Id).Column("Id");
+            Table("Courses");
+            Id(x => x.Id).Column("Id").GeneratedBy.Guid();
             Map(x => x.Title);
             Map(x => x.Description);
             Map(x => x.Image);
             Map(x => x.PreviewVideo);
+            References(x => x.Category).Column("CategoryId");
         }
     }
 }
