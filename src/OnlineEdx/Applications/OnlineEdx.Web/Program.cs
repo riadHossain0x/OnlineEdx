@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using OnlineEdx.Infrastructure;
 using OnlineEdx.Web;
 using Serilog;
 using Serilog.Events;
@@ -11,6 +12,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new WebModule());
+    containerBuilder.RegisterModule(new InfrastructureModule());
 });
 
 //Serilog configuration

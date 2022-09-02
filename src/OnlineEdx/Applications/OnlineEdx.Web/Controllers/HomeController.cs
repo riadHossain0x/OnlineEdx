@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NHibernate;
+using OnlineEdx.Infrastructure.Entities;
+using OnlineEdx.Infrastructure.Services;
+using OnlineEdx.Infrastructure.SessionFactories;
 using OnlineEdx.Web.Models;
+using System;
 using System.Diagnostics;
 
 namespace OnlineEdx.Web.Controllers
@@ -11,7 +16,6 @@ namespace OnlineEdx.Web.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _logger.LogInformation("Running well");
         }
 
         public IActionResult Index()
