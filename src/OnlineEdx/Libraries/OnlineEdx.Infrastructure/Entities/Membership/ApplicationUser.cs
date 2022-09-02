@@ -5,7 +5,7 @@ namespace OnlineEdx.Infrastructure.Entities.Membership
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
-        public string FirstName { get; set; } = null!;
-        public string LastName { get; set; } = null!;
+        public virtual string FirstName { get; set; } = null!;
+        public virtual string LastName { get; set; } = null!;
     }
 }
