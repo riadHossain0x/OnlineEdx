@@ -10,6 +10,7 @@ using FluentNHibernate.AspNetCore.Identity;
 using OnlineEdx.Membership.Services;
 using OnlineEdx.Infrastructure.Entities.Membership;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,8 +34,7 @@ builder.Host.UseSerilog((ctx, lc) => lc
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddTransient(t => new MsSQLSessionFactory().OpenSession());
-builder.Services.AddIdentityCore<ApplicationUser>()
-    .AddRoles<Role>()
+builder.Services.AddIdentity<ApplicationUser, Role>()
     .ExtendConfiguration()
     .AddNHibernateStores(t => t.SetSessionAutoFlush(true))
     .AddUserManager<UserManager>()
