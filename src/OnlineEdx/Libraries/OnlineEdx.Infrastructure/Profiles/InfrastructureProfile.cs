@@ -3,8 +3,8 @@ using ApplicationUserEO = OnlineEdx.Infrastructure.Entities.Membership.Applicati
 using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.Membership.ApplicationUser;
 using CategoryEO = OnlineEdx.Infrastructure.Entities.Category;
 using CategoryBO = OnlineEdx.Infrastructure.BusinessObjects.Category;
-using CourseEO = OnlineEdx.Infrastructure.Entities.Category;
-using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Category;
+using CourseEO = OnlineEdx.Infrastructure.Entities.Course;
+using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Course;
 
 namespace OnlineEdx.Infrastructure.Profiles
 {

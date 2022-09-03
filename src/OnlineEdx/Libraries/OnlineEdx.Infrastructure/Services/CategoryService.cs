@@ -45,7 +45,7 @@ namespace OnlineEdx.Infrastructure.Services
 
         public IList<CategoryBO> GetCategories()
         {
-            var categories = _edxUnitOfWork.CategoryRepository.GetAll().Select(x => new CategoryBO
+            var categories = _edxUnitOfWork.CategoryRepository.GetAll().AsQueryable().Select(x => new CategoryBO
             {
                 Id = x.Id,
                 Name = x.Name,

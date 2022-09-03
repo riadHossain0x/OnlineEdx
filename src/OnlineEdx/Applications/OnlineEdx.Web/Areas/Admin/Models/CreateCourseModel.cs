@@ -28,7 +28,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
         [Required]
         [Display(Name = "Preview Video Url")]
         public string PreviewVideo { get; set; } = null!;
-		public List<SelectListItem> Categories { get; set; } = null!;
+		public List<SelectListItem>? Categories { get; set; } = null!;
 
 		[Required]
 		[Display(Name = "Category")]

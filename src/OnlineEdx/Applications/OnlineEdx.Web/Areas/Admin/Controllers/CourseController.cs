@@ -31,9 +31,15 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
         {
 			try
 			{
+				if (!ModelState.IsValid)
+					throw new InvalidOperationException("Please provide value for all fields");
+
 				model.ResolveDependency(_scope);
 				model.CreateCourse();
-			}
+
+                ViewResponse("Course successfully created.", ResponseTypes.Success);
+				return RedirectToAction(nameof(Index));
+            }
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, ex.Message);
