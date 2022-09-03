@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using AutoMapper;
 using FluentNHibernate.Mapping;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using OnlineEdx.Infrastructure.BusinessObjects;
 using OnlineEdx.Infrastructure.Services;
 using OnlineEdx.Web.Validations;
 using System.ComponentModel.DataAnnotations;
@@ -24,32 +26,52 @@ namespace OnlineEdx.Web.Areas.Admin.Models
         public IFormFile ImageUrl { get; set; } = null!;
 
         [Required]
-        [Display(Name = "Video Preview")]
+        [Display(Name = "Preview Video Url")]
         public string PreviewVideo { get; set; } = null!;
+		public List<SelectListItem> Categories { get; set; } = null!;
 
 		[Required]
-		public int CategoryId { get; set; }
+		[Display(Name = "Category")]
+		public Guid CategoryId { get; set; }
 		public string? Image { get; set; } = null!;
 
 		private ICourseService _courseService = null!;
+		private ICategoryService _categoryService = null!;
 
 		public CreateCourseModel()
 		{
 
 		}
 
-		public CreateCourseModel(IMapper mapper, ILifetimeScope scope, ICourseService courseService)
+		public CreateCourseModel(IMapper mapper, ILifetimeScope scope, 
+			ICourseService courseService, ICategoryService categoryService)
 			: base(mapper, scope)
 		{
 			_courseService = courseService;
+			_categoryService = categoryService;
 		}
 
 		public override void ResolveDependency(ILifetimeScope scope)
 		{
 			_scope = scope;
 			_courseService = _scope.Resolve<ICourseService>();
+			_categoryService = _scope.Resolve<ICategoryService>();
 			base.ResolveDependency(scope);
 		}
 
+		public void GetCategoris()
+		{
+			Categories = _categoryService.GetCategories().Select(x => new SelectListItem
+			{
+				Text = x.Name,
+				Value = x.Id.ToString()
+			}).ToList();
+        }
+
+		public void CreateCourse()
+		{
+			var course = _mapper.Map<Course>(this);
+			_courseService.Add(course);
+		}
 	}
 }

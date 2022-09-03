@@ -1,6 +1,6 @@
 ﻿@model CreateCourseModel
 @{
-	ViewData["PageNav"] = "Create Category";
+	ViewData["PageNav"] = "Create Course";
 }
 <section class="content-main" style="max-width: 720px">
 	<div class="card mb-4">
@@ -19,6 +19,14 @@
 				</div>
 
 				<div class="mb-4">
+					<label class="form-label" asp-for="CategoryId"></label>
+					<select asp-for="CategoryId" asp-items="Model.Categories" class="form-control">
+						<option value="">Select category</option>
+					</select>
+					<span asp-validation-for="CategoryId" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
 					<label class="form-label" asp-for="ImageUrl"></label>
 					<input class="form-control" type="file" asp-for="ImageUrl">
 					<span asp-validation-for="ImageUrl" class="text-danger"></span>
@@ -26,7 +34,7 @@
 
 				<div class="mb-4">
 					<label class="form-label" asp-for="PreviewVideo"></label>
-					<textarea placeholder="Type here" class="form-control" asp-for="PreviewVideo" rows="4"></textarea>
+					<input placeholder="Type here" class="form-control" asp-for="PreviewVideo" rows="4">
 					<span asp-validation-for="PreviewVideo" class="text-danger"></span>
 				</div>
 
