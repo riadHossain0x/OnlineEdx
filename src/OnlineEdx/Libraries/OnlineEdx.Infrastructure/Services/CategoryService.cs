@@ -30,8 +30,13 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork.SaveChanges();
         }
 
-        public CategoryBO Get(Guid id)
+        public CategoryBO GetById(Guid id)
         {
+            var count = _edxUnitOfWork.CategoryRepository.Find(x => x.Id == id).Count();
+
+            if (count == 0)
+                throw new InvalidOperationException("Category not found, please try again.");
+
             var categoryEO = _edxUnitOfWork.CategoryRepository.Get(id);
             return _mapper.Map<CategoryBO>(categoryEO);
         }

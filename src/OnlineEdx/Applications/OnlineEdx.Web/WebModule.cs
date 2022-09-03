@@ -14,6 +14,7 @@ namespace OnlineEdx.Web
             builder.RegisterType<CreateCategoryModel>().AsSelf();
             builder.RegisterType<GetCategoriesModel>().AsSelf();
             builder.RegisterType<DeleteCategoryModel>().AsSelf();
+            builder.RegisterType<EditCategoryModel>().AsSelf();
             base.Load(builder);
         }
     }

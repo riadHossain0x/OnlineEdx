@@ -5,7 +5,7 @@ namespace OnlineEdx.Infrastructure.Services
 {
     public interface ICategoryService
     {
-        Category Get(Guid id);
+        Category GetById(Guid id);
         IQueryable<Category> GetAll();
         void Add(Category category);
         void Update(Category entity);

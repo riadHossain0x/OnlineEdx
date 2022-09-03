@@ -70,9 +70,24 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Edit()
+        public IActionResult Edit(Guid id)
         {
-            return View();
+            try
+            {
+                if (id == Guid.Empty)
+                    throw new ArgumentNullException("Id must be provided.");
+
+                var model = _scope.Resolve<EditCategoryModel>();
+                model.GetCategory(id);
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ViewResponse(ex.Message, ResponseTypes.Error);
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }
