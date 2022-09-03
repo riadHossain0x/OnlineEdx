@@ -30,7 +30,7 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork.SaveChanges();
         }
 
-        public CategoryBO Get(int id)
+        public CategoryBO Get(Guid id)
         {
             var categoryEO = _edxUnitOfWork.CategoryRepository.Get(id);
             return _mapper.Map<CategoryBO>(categoryEO);
@@ -45,13 +45,9 @@ namespace OnlineEdx.Infrastructure.Services
         public async Task<(int total, int totalDisplay, IList<CategoryBO> records)> GetCategorisAsync(int pageIndex, 
             int pageSize, string searchText, string orderBy)
         {
-            var categories = new List<CategoryBO>();
             var result = await _edxUnitOfWork.CategoryRepository.GetDynamicAsync(x => x.Name.Contains(searchText), orderBy, pageIndex, pageSize);
 
-            foreach (var data in result.data)
-            {
-                categories.Add(_mapper.Map<CategoryBO>(data));
-            }
+            var categories = result.data.Select(x => _mapper.Map<CategoryBO>(x)).ToList();
             return (result.total, result.totalDisplay, categories);
         }
 
@@ -61,6 +57,19 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork.CategoryRepository.Remove(categoryEO);
             _edxUnitOfWork.SaveChanges();
         }
+
+        public void RemoveById(Guid id)
+        {
+            var count = _edxUnitOfWork.CategoryRepository.Find(x => x.Id == id).Count();
+
+            if (count == 0)
+                throw new InvalidOperationException("Category not found, please try again.");
+
+            var categoryEO = _edxUnitOfWork.CategoryRepository.Get(id);
+            _edxUnitOfWork.CategoryRepository.Remove(categoryEO);
+            _edxUnitOfWork.SaveChanges();
+        }
+
         public void Update(CategoryBO entity)
         {
             var categoryEO = _mapper.Map<CategoryEO>(entity);

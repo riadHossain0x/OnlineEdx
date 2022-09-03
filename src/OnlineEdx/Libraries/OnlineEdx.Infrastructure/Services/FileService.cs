@@ -16,7 +16,7 @@ namespace OnlineEdx.Infrastructure.Services
         public FileService(IHostingEnvironment environment)
         {
             _environment = environment;
-            _webPath = Path.Combine(_environment.WebRootPath, "/storeage/images");
+            _webPath = Path.Combine(_environment.WebRootPath, "storage\\images");
         }
 
         private bool Exists(string path)

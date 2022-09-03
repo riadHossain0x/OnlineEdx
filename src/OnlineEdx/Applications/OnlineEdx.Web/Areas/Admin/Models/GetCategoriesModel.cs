@@ -33,7 +33,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
                 recordsFiltered = data.totalDisplay,
                 data = data.records.Select(x => new string[]
                 {
-                    x.Image,
+                    Path.Combine("\\storage\\images", x.Image),
                     x.Name,
                     x.Description,
                     x.Id.ToString()

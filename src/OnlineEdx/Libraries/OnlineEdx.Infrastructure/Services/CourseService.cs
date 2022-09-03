@@ -23,7 +23,7 @@ namespace OnlineEdx.Infrastructure.Services
             return _edxUnitOfWork.CourseRepository.Find(predicate).AsQueryable();
         }
 
-        public Course Get(int id)
+        public Course Get(Guid id)
         {
             return _edxUnitOfWork.CourseRepository.Get(id);
         }

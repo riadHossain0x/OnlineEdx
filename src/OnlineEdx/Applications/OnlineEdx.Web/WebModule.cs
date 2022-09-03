@@ -13,6 +13,7 @@ namespace OnlineEdx.Web
             builder.RegisterType<LogoutModel>().AsSelf();
             builder.RegisterType<CreateCategoryModel>().AsSelf();
             builder.RegisterType<GetCategoriesModel>().AsSelf();
+            builder.RegisterType<DeleteCategoryModel>().AsSelf();
             base.Load(builder);
         }
     }

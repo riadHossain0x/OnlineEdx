@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-6">
                             <div class="float-end">
-                                <a asp-action="Create" asp-controller="Product" class="btn btn-primary btn-sm text-white">Add New Product</a>
+                                <a asp-action="Create" asp-controller="Category" class="btn btn-primary btn-sm text-white">Add New Product</a>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <table id="category" class="table table-bordered table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th style ="width:8%"></th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th style="width:13%">Action</th>
@@ -78,7 +78,7 @@
                         "orderable": false,
                         "targets": 0,
                         "render": function (data, type, row) {
-                            return `<img src="${row[0]}" alt="No Image" width="40px">`;
+                            return `<img src="${row[0]}" width="40px">`;
                         }
                     }
                 ]

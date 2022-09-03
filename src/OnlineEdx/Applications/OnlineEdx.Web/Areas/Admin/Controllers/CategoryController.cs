@@ -54,6 +54,22 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                var model = _scope.Resolve<DeleteCategoryModel>();
+                model.DeleteCategory(id);
+
+                ViewResponse("Category successfully deleted.", ResponseTypes.Success);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ViewResponse(ex.Message, ResponseTypes.Error);
+            }
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Edit()
         {
             return View();

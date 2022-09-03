@@ -16,7 +16,7 @@ namespace OnlineEdx.Data
             _session = session;
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(TKey id)
         {
             return _session.Get<TEntity>(id);
         }
