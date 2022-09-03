@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentNHibernate.Utils;
 using OnlineEdx.Infrastructure.BusinessObjects;
 using OnlineEdx.Infrastructure.Entities;
 using OnlineEdx.Infrastructure.UnitOfWorks;
@@ -18,6 +19,7 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public void Add(CategoryBO category)
         {
             var count = _edxUnitOfWork.CategoryRepository.Find(x => x.Name.ToLower() == category.Name.ToLower()).Count();
@@ -39,12 +41,6 @@ namespace OnlineEdx.Infrastructure.Services
 
             var categoryEO = _edxUnitOfWork.CategoryRepository.Get(id);
             return _mapper.Map<CategoryBO>(categoryEO);
-        }
-
-        public IQueryable<CategoryBO> GetAll()
-        {
-            var categoriesEO = _edxUnitOfWork.CategoryRepository.GetAll().AsQueryable();
-            return _mapper.Map<IQueryable<CategoryBO>>(categoriesEO);
         }
 
         public async Task<(int total, int totalDisplay, IList<CategoryBO> records)> GetCategorisAsync(int pageIndex, 
