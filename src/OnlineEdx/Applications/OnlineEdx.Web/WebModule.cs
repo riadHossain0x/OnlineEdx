@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using OnlineEdx.Web.Areas.Admin.Models;
 using OnlineEdx.Web.Models;
 
 namespace OnlineEdx.Web
@@ -10,6 +11,7 @@ namespace OnlineEdx.Web
             builder.RegisterType<LoginModel>().AsSelf();
             builder.RegisterType<RegisterModel>().AsSelf();
             builder.RegisterType<LogoutModel>().AsSelf();
+            builder.RegisterType<CreateCategoryModel>().AsSelf();
             base.Load(builder);
         }
     }

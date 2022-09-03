@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using OnlineEdx.Infrastructure.Entities.Membership;
-using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.ApplicationUser;
+using ApplicationUserEO = OnlineEdx.Infrastructure.Entities.Membership.ApplicationUser;
+using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.Membership.ApplicationUser;
+using CategoryEO = OnlineEdx.Infrastructure.Entities.Category;
+using CategoryBO = OnlineEdx.Infrastructure.BusinessObjects.Category;
 
 namespace OnlineEdx.Infrastructure.Profiles
 {
@@ -8,7 +10,8 @@ namespace OnlineEdx.Infrastructure.Profiles
     {
         public InfrastructureProfile()
         {
-            CreateMap<ApplicationUser, ApplicationUserBO>().ReverseMap();
+            CreateMap<ApplicationUserEO, ApplicationUserBO>().ReverseMap();
+            CreateMap<CategoryBO, CategoryEO>().ReverseMap();
         }
     }
 }

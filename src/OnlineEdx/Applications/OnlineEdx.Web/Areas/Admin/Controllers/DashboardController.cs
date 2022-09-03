@@ -12,7 +12,6 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            ViewData["PageNav"] = "Dashboard";
             return View();
         }
     }
