@@ -20,22 +20,15 @@ namespace OnlineEdx.Infrastructure.Services
         }
         public void Add(CategoryBO category)
         {
+            var count = _edxUnitOfWork.CategoryRepository.Find(x => x.Name.ToLower() == category.Name.ToLower()).Count();
+
+            if (count > 0)
+                throw new InvalidOperationException("Category already exists!");
+
             var categoryEO = _mapper.Map<CategoryEO>(category);
             _edxUnitOfWork.CategoryRepository.Add(categoryEO);
             _edxUnitOfWork.SaveChanges();
         }
-
-        public void AddRange(IEnumerable<CategoryBO> entities)
-        {
-            var categoriesEO = _mapper.Map<List<CategoryEO>>(entities);
-            _edxUnitOfWork.CategoryRepository.AddRange(categoriesEO);
-            _edxUnitOfWork.SaveChanges();
-        }
-
-        //public IQueryable<CategoryBO> Find(Expression<Func<CategoryBO, bool>> predicate)
-        //{
-        //    return _edxUnitOfWork.CategoryRepository.Find(predicate).AsQueryable();
-        //}
 
         public CategoryBO Get(int id)
         {
@@ -55,14 +48,6 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork.CategoryRepository.Remove(categoryEO);
             _edxUnitOfWork.SaveChanges();
         }
-
-        public void RemoveRange(IEnumerable<CategoryBO> entities)
-        {
-            var entitiesEO = _mapper.Map<List<CategoryEO>>(entities);
-            _edxUnitOfWork.CategoryRepository.RemoveRange(entitiesEO);
-            _edxUnitOfWork.SaveChanges();
-        }
-
         public void Update(CategoryBO entity)
         {
             var categoryEO = _mapper.Map<CategoryEO>(entity);
