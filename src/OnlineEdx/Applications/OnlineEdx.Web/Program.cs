@@ -33,7 +33,7 @@ builder.Host.UseSerilog((ctx, lc) => lc
 //Automapper configuration
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddTransient(t => new MsSQLSessionFactory().OpenSession());
+builder.Services.AddScoped(t => new MsSQLSessionFactory().OpenSession());
 builder.Services.AddIdentity<ApplicationUser, Role>()
     .ExtendConfiguration()
     .AddNHibernateStores(t => t.SetSessionAutoFlush(true))

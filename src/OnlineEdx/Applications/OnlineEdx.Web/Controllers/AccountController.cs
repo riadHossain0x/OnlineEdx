@@ -128,7 +128,7 @@ namespace OnlineEdx.Web.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        ViewResponse("Invalid login attempt.", ResponseTypes.Error);
                         return View(model);
                     }
                 }
@@ -156,7 +156,7 @@ namespace OnlineEdx.Web.Controllers
                 ViewResponse(ex.Message, ResponseTypes.Error);
                 _logger.LogError(ex, ex.Message);
             }
-            return RedirectToAction(typeof(Index).Name);
+            return RedirectToAction(nameof(Login));
         }
 
     }
