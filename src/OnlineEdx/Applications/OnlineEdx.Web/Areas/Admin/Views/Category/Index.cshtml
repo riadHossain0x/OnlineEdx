@@ -19,20 +19,20 @@
                         </div>
                         <div class="col-6">
                             <div class="float-end">
-                                <a asp-action="Create" asp-controller="Product" class="btn btn-primary btn-sm text-white">Add New Product<span class="mx-2"><i class="fa fa-plus"></i></span> </a>
+                                <a asp-action="Create" asp-controller="Product" class="btn btn-primary btn-sm text-white">Add New Product</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive px-2" style="height: 400px;">
-                    <table id="category" class="table table-bordered table-striped">
+                <div class="card-body table-responsive px-2">
+                    <table id="category" class="table table-bordered table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <td></td>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Action</th>
+                                <th style="width:13%">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -61,17 +61,24 @@
                         "orderable": false,
                         "targets": 3,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-outline btn-info btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/details/${data}'" value='${data}'>
-                                                    <i class="fas fa-eye text-white p-1"></i>
-                                                </button>
+                            return `<button type="submit" class="btn btn-success btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/details/${data}'" value='${data}'>
+                                                                                    <i class='fa fa-info-circle'></i>
+                                                                                    </i>
+                                                                                </button>
+                                                                                <button type="submit" class="btn btn-warning btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/edit/${data}'" value='${data}'>
+                                                                                    <i class='fa fa-edit'></i>
+                                                                                </button>
+                                                                                <button type="submit" class="btn btn-danger btn-sm rounded-cirlce show-bs-modal" data-id='${data}' value='${data}'>
+                                                                                    <i class='fa fa-trash-o'></i>
+                                                                                </button>`;
+                        },
 
-                                                <button type="submit" class="btn btn-outline btn-warning btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/update/${data}'" value='${data}'>
-                                                    <i class="fas fa-edit text-white p-1"></i>
-                                                </button>
-
-                                                <button type="submit" class="btn btn-outline btn-danger btn-sm rounded-cirlce show-bs-modal" data-id='${data}' value='${data}'>
-                                                    <i class="fas fa-trash p-1"></i>
-                                                </button>`;
+                    },
+                    {
+                        "orderable": false,
+                        "targets": 0,
+                        "render": function (data, type, row) {
+                            return `<img src="${row[0]}" alt="No Image" width="40px">`;
                         }
                     }
                 ]
