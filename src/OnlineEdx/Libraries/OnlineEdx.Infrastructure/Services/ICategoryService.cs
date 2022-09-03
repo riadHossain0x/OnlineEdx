@@ -10,5 +10,7 @@ namespace OnlineEdx.Infrastructure.Services
         void Add(Category category);
         void Update(Category entity);
         void Remove(Category entity);
+        Task<(int total, int totalDisplay, IList<Category> records)> GetCategorisAsync(int pageIndex, int pageSize, 
+            string searchText, string orderBy);
     }
 }

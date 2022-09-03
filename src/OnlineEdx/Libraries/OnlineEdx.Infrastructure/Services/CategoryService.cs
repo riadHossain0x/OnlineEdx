@@ -42,6 +42,19 @@ namespace OnlineEdx.Infrastructure.Services
             return _mapper.Map<IQueryable<CategoryBO>>(categoriesEO);
         }
 
+        public async Task<(int total, int totalDisplay, IList<CategoryBO> records)> GetCategorisAsync(int pageIndex, 
+            int pageSize, string searchText, string orderBy)
+        {
+            var categories = new List<CategoryBO>();
+            var result = await _edxUnitOfWork.CategoryRepository.GetDynamicAsync(x => x.Name.Contains(searchText), orderBy, pageIndex, pageSize);
+
+            foreach (var data in result.data)
+            {
+                categories.Add(_mapper.Map<CategoryBO>(data));
+            }
+            return (result.total, result.totalDisplay, categories);
+        }
+
         public void Remove(CategoryBO entity)
         {
             var categoryEO = _mapper.Map<CategoryEO>(entity);

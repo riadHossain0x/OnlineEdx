@@ -9,16 +9,16 @@
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
-    <link href="~/AdminTheme/css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="~/admintheme/css/bootstrapf9e3.css?v=1.1" rel="stylesheet" type="text/css" />
 
     <!-- custom style -->
-    <link href="~/AdminTheme/css/uif9e3.css?v=1.1" rel="stylesheet" type="text/css" />
-    <link href="~/AdminTheme/css/responsivef9e3.css?v=1.1" rel="stylesheet" />
+    <link href="~/admintheme/css/uif9e3.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="~/admintheme/css/responsivef9e3.css?v=1.1" rel="stylesheet" />
     <!-- Toastr css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" type="text/css" rel="stylesheet">
     <!-- iconfont -->
-    <link rel="stylesheet" href="~/AdminTheme/fonts/material-icon/css/round.css" />
-    <link rel="stylesheet" href="~/AdminTheme/Theme.css">
+    <link rel="stylesheet" href="~/admintheme/fonts/material-icon/css/round.css" />
+    <link rel="stylesheet" href="~/admintheme/Theme.css">
     <!-- Font awesome 5 -->
     <link href="~/Theme/fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
     @await RenderSectionAsync("Styles", required: false)
@@ -31,7 +31,7 @@
 
         <div class="aside-top">
             <a asp-action="Index" asp-controller="Dashboard" class="brand-wrap">
-                <img src="~/AdminTheme/images/logo.svg" height="46" class="logo" alt="dashboard template">
+                <img src="~/admintheme/images/logo.svg" height="46" class="logo" alt="dashboard template">
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize">
@@ -114,7 +114,7 @@
 
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            <img class="rounded-circle" src="~/AdminTheme/images/people/avatar1.jpg" width="40" height="40">
+                            <img class="rounded-circle" src="~/admintheme/images/people/avatar1.jpg" width="40" height="40">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="#">@User.Identity!.Name</a>
@@ -136,7 +136,6 @@
             <div class="content-header">
                 <h2 class="content-title">@ViewData["PageNav"]</h2>
             </div>
-            <hr />
 
             <partial name="_ResponsePartial" />
 
@@ -152,12 +151,12 @@
         }
     </script>
 
-    <script src="~/AdminTheme/js/jquery-3.5.0.min.js"></script>
-    <script src="~/AdminTheme/js/bootstrap.bundle.min.js"></script>
+    <script src="~/admintheme/js/jquery-3.5.0.min.js"></script>
+    <script src="~/admintheme/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS files-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!-- Custom JS -->
-    <script src="~/AdminTheme/js/scriptc619.js?v=1.0"></script>
+    <script src="~/admintheme/js/scriptc619.js?v=1.0"></script>
     <!-- Font Awesome cdn-->
     <script src="https://use.fontawesome.com/f96b8d852e.js"></script>
     <!-- Toastr css -->

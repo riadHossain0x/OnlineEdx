@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdx.Web.Areas.Admin.Models;
 using OnlineEdx.Web.Enums;
+using OnlineEdx.Web.Models;
 
 namespace OnlineEdx.Web.Areas.Admin.Controllers
 {
@@ -15,6 +16,14 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public async Task<JsonResult> GetCategories()
+        {
+            var dataTableModel = new DataTablesAjaxRequestModel(Request);
+            var model = _scope.Resolve<GetCategoriesModel>();
+            var list = await model.GetCategoriesAsync(dataTableModel);
+            return Json(list);
         }
 
         [HttpGet]
