@@ -21,29 +21,35 @@ namespace OnlineEdx.Web.Areas.Admin.Models
         [FileType(new string[] { ".jpg", ".png", ".jpeg", ".gif" })]
         [Display(Name = "Image")]
         public IFormFile ImageUrl { get; set; } = null!;
+        public string? Image { get; set; } = null!;
 
         private ICategoryService _categoryService = null!;
+        private IFileService _fileService = null!;
 
         public CreateCategoryModel()
         {
 
         }
 
-        public CreateCategoryModel(IMapper mapper, ILifetimeScope scope, ICategoryService categoryService)
+        public CreateCategoryModel(IMapper mapper, ILifetimeScope scope, ICategoryService categoryService,
+            IFileService fileService)
             : base(mapper, scope)
         {
             _categoryService = categoryService;
+            _fileService = fileService;
         }
 
         public override void ResolveDependency(ILifetimeScope scope)
         {
             _scope = scope;
             _categoryService = _scope.Resolve<ICategoryService>();
+            _fileService = _scope.Resolve<IFileService>();
             base.ResolveDependency(scope);
         }
 
-        internal void CreateCategory()
+        internal async Task CreateCategory()
         {
+            Image = await _fileService.StoreFileAsync(ImageUrl);
             var category = _mapper.Map<Category>(this);
             _categoryService.Add(category);
         }

@@ -26,7 +26,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateCategoryModel model)
+        public async Task<IActionResult> Create(CreateCategoryModel model)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
                     throw new InvalidOperationException("Please provide value for all field.");
 
                 model.ResolveDependency(_scope);
-                model.CreateCategory();
+                await model.CreateCategory();
                 ViewResponse("Category successfully created.", ResponseTypes.Success);
                 return RedirectToAction(nameof(Index));
             }
