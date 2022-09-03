@@ -1,0 +1,51 @@
+﻿using Autofac;
+using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using OnlineEdx.Infrastructure.BusinessObjects;
+using OnlineEdx.Membership.Services;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace OnlineEdx.Web.Models
+{
+    public class LoginModel : BaseModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = null!;
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = null!;
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+        public string ReturnUrl { get; set; } = null!;
+        public string ErrorMessage { get; set; } = null!;
+
+        private readonly IAccountService _accountService = null!;
+
+        public LoginModel()
+        {
+
+        }
+
+        public LoginModel(IMapper mapper, ILifetimeScope scope, IAccountService accountService)
+            : base(mapper, scope)
+        {
+            _accountService = accountService;
+        }
+
+        public async Task<SignInResult> PasswordSignInAsync()
+        {
+            var user = _mapper.Map<ApplicationUser>(this);
+            return await _accountService.PasswordSignInAsync(user);
+        }
+
+        public async Task<IList<string>> GetCurrentUserRolesAsync()
+        {
+            return await _accountService.GetCurrentUserRolesAsync(Email);
+        }
+    }
+}
