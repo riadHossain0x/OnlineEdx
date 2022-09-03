@@ -25,7 +25,7 @@ namespace OnlineEdx.Web.Models
         public string Email { get; set; } = null!;
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; } = null!;
@@ -36,7 +36,7 @@ namespace OnlineEdx.Web.Models
         public string ConfirmPassword { get; set; } = null!;
         public string? ReturnUrl { get; set; } = null!;
 
-        private readonly IAccountService _accountService = null!;
+        private IAccountService _accountService = null!;
 
         public RegisterModel()
         {
@@ -47,6 +47,13 @@ namespace OnlineEdx.Web.Models
             : base(mapper, scope)
         {
             _accountService = accountService;
+        }
+
+        public override void ResolveDependency(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _accountService = _scope.Resolve<IAccountService>();
+            base.ResolveDependency(scope);
         }
 
         public async Task<IdentityResult> CreateAccountAsync()

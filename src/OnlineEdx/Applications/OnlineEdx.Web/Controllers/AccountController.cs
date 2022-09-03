@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdx.Infrastructure.Entities.Membership;
 using OnlineEdx.Membership.Services;
+using OnlineEdx.Web.Enums;
 using OnlineEdx.Web.Models;
 
 namespace OnlineEdx.Web.Controllers
@@ -25,7 +26,7 @@ namespace OnlineEdx.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(Login));
         }
 
         public IActionResult Register(string returnUrl = null!)
@@ -53,10 +54,9 @@ namespace OnlineEdx.Web.Controllers
 
                     if (!result.Succeeded)
                     {
-
                         foreach (var error in result.Errors)
                         {
-                            ModelState.AddModelError(string.Empty, error.Description);
+                            ViewResponse(error.Description, ResponseTypes.Error);
                         }
                         return View(model);
                     }
@@ -70,6 +70,7 @@ namespace OnlineEdx.Web.Controllers
             }
             catch (Exception ex)
             {
+                ViewResponse(ex.Message, ResponseTypes.Error);
                 _logger.LogError(ex, ex.Message);
             }
 
@@ -96,6 +97,7 @@ namespace OnlineEdx.Web.Controllers
             }
             catch (Exception ex)
             {
+                ViewResponse(ex.Message, ResponseTypes.Error);
                 _logger.LogError(ex, ex.Message);
             }
             return View(model);
@@ -133,6 +135,7 @@ namespace OnlineEdx.Web.Controllers
             }
             catch (Exception ex)
             {
+                ViewResponse(ex.Message, ResponseTypes.Error);
                 _logger.LogError(ex, ex.Message);
             }
 
@@ -150,6 +153,7 @@ namespace OnlineEdx.Web.Controllers
             }
             catch (Exception ex)
             {
+                ViewResponse(ex.Message, ResponseTypes.Error);
                 _logger.LogError(ex, ex.Message);
             }
             return RedirectToAction(typeof(Index).Name);

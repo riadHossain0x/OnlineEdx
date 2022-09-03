@@ -21,10 +21,10 @@ namespace OnlineEdx.Web.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-        public string ReturnUrl { get; set; } = null!;
-        public string ErrorMessage { get; set; } = null!;
+        public string? ReturnUrl { get; set; }
+        public string? ErrorMessage { get; set; }
 
-        private readonly IAccountService _accountService = null!;
+        private IAccountService _accountService = null!;
 
         public LoginModel()
         {
@@ -35,6 +35,12 @@ namespace OnlineEdx.Web.Models
             : base(mapper, scope)
         {
             _accountService = accountService;
+        }
+        public override void ResolveDependency(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _accountService = _scope.Resolve<IAccountService>();
+            base.ResolveDependency(scope);
         }
 
         public async Task<SignInResult> PasswordSignInAsync()
