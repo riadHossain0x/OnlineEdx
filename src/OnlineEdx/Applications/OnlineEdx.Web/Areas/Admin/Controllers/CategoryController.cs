@@ -13,11 +13,13 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
         {
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public async Task<JsonResult> GetCategories()
         {
             var dataTableModel = new DataTablesAjaxRequestModel(Request);
@@ -39,7 +41,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    throw new InvalidOperationException("Please provide value for all field.");
+                    throw new InvalidOperationException("Please provide value for all fields.");
 
                 model.ResolveDependency(_scope);
                 await model.CreateCategory();
@@ -54,6 +56,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Delete(Guid id)
         {
             try
@@ -70,6 +73,8 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
         public IActionResult Edit(Guid id)
         {
             try
@@ -81,6 +86,30 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
                 model.GetCategory(id);
 
                 return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ViewResponse(ex.Message, ResponseTypes.Error);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditCategoryModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    throw new InvalidOperationException("Please provide value for all fields.");
+
+                model.ResolveDependency(_scope);
+                await model.UpdateCategoryAsync();
+
+                ViewResponse("Category successfully updated.", ResponseTypes.Success);
+
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {

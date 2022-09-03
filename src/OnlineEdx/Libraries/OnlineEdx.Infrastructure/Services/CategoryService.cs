@@ -56,13 +56,6 @@ namespace OnlineEdx.Infrastructure.Services
             return (result.total, result.totalDisplay, categories);
         }
 
-        public void Remove(CategoryBO entity)
-        {
-            var categoryEO = _mapper.Map<CategoryEO>(entity);
-            _edxUnitOfWork.CategoryRepository.Remove(categoryEO);
-            _edxUnitOfWork.SaveChanges();
-        }
-
         public void RemoveById(Guid id)
         {
             var count = _edxUnitOfWork.CategoryRepository.Find(x => x.Id == id).Count();
@@ -71,13 +64,21 @@ namespace OnlineEdx.Infrastructure.Services
                 throw new InvalidOperationException("Category not found, please try again.");
 
             var categoryEO = _edxUnitOfWork.CategoryRepository.Get(id);
+
             _edxUnitOfWork.CategoryRepository.Remove(categoryEO);
             _edxUnitOfWork.SaveChanges();
         }
 
         public void Update(CategoryBO entity)
         {
+            var count = _edxUnitOfWork.CategoryRepository.Find(x => x.Id != entity.Id && 
+                                                    x.Name.ToLower() == entity.Name.ToLower()).Count();
+
+            if (count > 0)
+                throw new InvalidOperationException("Category with same name already exists");
+
             var categoryEO = _mapper.Map<CategoryEO>(entity);
+
             _edxUnitOfWork.CategoryRepository.Update(categoryEO);
             _edxUnitOfWork.SaveChanges();
         }

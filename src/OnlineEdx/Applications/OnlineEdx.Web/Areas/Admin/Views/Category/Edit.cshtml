@@ -5,7 +5,7 @@
 <section class="content-main" style="max-width: 720px">
 	<div class="card mb-4">
 		<div class="card-body">
-			<form asp-action="Create" method="post" enctype="multipart/form-data" asp-antiforgery="true">
+			<form asp-action="Edit" method="post" enctype="multipart/form-data" asp-antiforgery="true">
 				<input type="text" hidden asp-for="Id" id="product_name">
 				<div class="mb-4">
 					<label for="category_name" class="form-label" asp-for="Name"></label>
@@ -20,11 +20,19 @@
 				</div>
 
 				<div class="mb-4">
+					@if (Model.Image == null)
+					{
+						<img class="form-control img-lg mb-2" style="width:100px;height:100px;" id="imagePreview" src="~/storage/images/default.png" alt="No Image">
+					}
+					else
+					{
+						<img class="form-control img-lg mb-2" style="width:100px;height:100px;" id="imagePreview" src="@string.Format("\\storage\\images\\{0}", @Model.Image)">
+					}
 					<label class="form-label" asp-for="ImageUrl"></label>
-					<input class="form-control" type="file" asp-for="ImageUrl">
+					<input class="form-control" type="file" onchange="readImage(this);" asp-for="ImageUrl">
 					<span asp-validation-for="ImageUrl" class="text-danger"></span>
 				</div>
-
+				<input type="text" hidden asp-for="Image" id="product_name">
 				<a asp-action="Index" class="btn btn-outline-danger"> &times; Cancel</a>
 				<button class="btn btn-primary" type="submit">Create</button>
 			</form>
@@ -34,4 +42,18 @@
 </section> <!-- content-main end// -->
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
+	<script>
+		function readImage(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#imagePreview')
+						.attr('src', e.target.result);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
 }
