@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Fluent.NHibernate.AspNetCore.Identity" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.8" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\OnlineEdx.Infrastructure\OnlineEdx.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Libraries\OnlineEdx.Membership\OnlineEdx.Membership.csproj" />
   </ItemGroup>
 
 </Project>

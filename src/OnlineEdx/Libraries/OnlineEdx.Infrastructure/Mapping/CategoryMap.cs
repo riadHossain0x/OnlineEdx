@@ -12,7 +12,7 @@ namespace OnlineEdx.Infrastructure.Mapping
     {
         public CategoryMap()
         {
-            Table("Category");
+            Table("Categories");
             Id(x => x.Id).GeneratedBy.Guid();
             Map(x => x.Name);
             Map(x => x.Description);
