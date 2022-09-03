@@ -1,11 +1,9 @@
 ﻿using Autofac;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using OnlineEdx.Infrastructure.BusinessObjects;
+using OnlineEdx.Infrastructure.BusinessObjects.Membership;
 using OnlineEdx.Membership.Services;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
 namespace OnlineEdx.Web.Models
 {

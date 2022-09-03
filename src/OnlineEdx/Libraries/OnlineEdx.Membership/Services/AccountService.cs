@@ -6,12 +6,10 @@ using System.Security.Claims;
 using System.Text;
 using OnlineEdx.Infrastructure.Entities.Membership;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
-using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.ApplicationUser;
+using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.Membership.ApplicationUser;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using NHibernate;
-using OnlineEdx.Data;
-using NHibernate.Id.Insert;
 
 namespace OnlineEdx.Membership.Services
 {

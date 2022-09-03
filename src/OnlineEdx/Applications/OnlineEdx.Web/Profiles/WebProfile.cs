@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using OnlineEdx.Infrastructure.BusinessObjects;
+using OnlineEdx.Infrastructure.BusinessObjects.Membership;
+using OnlineEdx.Web.Areas.Admin.Models;
 using OnlineEdx.Web.Models;
 
 namespace OnlineEdx.Web.Profiles
@@ -18,7 +20,9 @@ namespace OnlineEdx.Web.Profiles
                     Password = x.Password
                 });
 
-            CreateMap<LoginModel, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, LoginModel>().ReverseMap();
+            CreateMap<Category, CreateCategoryModel>().ReverseMap();
+            CreateMap<Category, EditCategoryModel>().ReverseMap();
         }
     }
 }

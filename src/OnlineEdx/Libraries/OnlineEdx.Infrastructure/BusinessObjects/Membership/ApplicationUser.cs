@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineEdx.Infrastructure.BusinessObjects
+namespace OnlineEdx.Infrastructure.BusinessObjects.Membership
 {
     public class ApplicationUser
     {

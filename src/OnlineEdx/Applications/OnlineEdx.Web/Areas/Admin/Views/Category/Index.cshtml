@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["PageNav"] = "Category List";
+}
+@section Styles
+    {
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/admintheme/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="float-left">
+                                <h3 class="card-title"></h3>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="float-end">
+                                <a asp-action="Create" asp-controller="Category" class="btn btn-primary btn-sm text-white">Add New Product</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive px-2">
+                    <table id="category" class="table table-bordered table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style ="width:8%"></th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th style="width:13%">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <partial name="_ModalPartial" />
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+    @section Scripts{
+    <!-- DataTables -->
+    <script src="~/admintheme/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/admintheme/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+            $('#category').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/admin/category/getcategories",
+                },
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 3,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-success btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/details/${data}'" value='${data}'>
+                                                                                    <i class='fa fa-info-circle'></i>
+                                                                                    </i>
+                                                                                </button>
+                                                                                <button type="submit" class="btn btn-warning btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/edit/${data}'" value='${data}'>
+                                                                                    <i class='fa fa-edit'></i>
+                                                                                </button>
+                                                                                <button type="submit" class="btn btn-danger btn-sm rounded-cirlce show-bs-modal" data-id='${data}' value='${data}'>
+                                                                                    <i class='fa fa-trash-o'></i>
+                                                                                </button>`;
+                        },
+
+                    },
+                    {
+                        "orderable": false,
+                        "targets": 0,
+                        "render": function (data, type, row) {
+                            return `<img src="${row[0]}" width="40px">`;
+                        }
+                    }
+                ]
+            });
+
+            $('#category').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data("id");
+                var modal = $("#modal-default");
+                modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+                $("#deleteId").val(id);
+                $("#deleteForm").attr("action", "/admin/category/delete");
+                modal.modal('show');
+            });
+
+            $("#deleteButton").click(function () {
+                $("#deleteForm").submit();
+            });
+        });
+    </script>
+}

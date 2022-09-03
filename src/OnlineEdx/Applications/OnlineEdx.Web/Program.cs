@@ -10,7 +10,6 @@ using FluentNHibernate.AspNetCore.Identity;
 using OnlineEdx.Membership.Services;
 using OnlineEdx.Infrastructure.Entities.Membership;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

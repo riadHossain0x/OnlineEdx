@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OnlineEdx.Infrastructure.Entities.Membership;
-using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.ApplicationUser;
+using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.Membership.ApplicationUser;
 
 namespace OnlineEdx.Membership.Services
 {

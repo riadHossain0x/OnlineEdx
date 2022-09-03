@@ -23,6 +23,8 @@ namespace OnlineEdx.Infrastructure
                 .InstancePerLifetimeScope();
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<FileService>().As<IFileService>()
+                .InstancePerLifetimeScope();
             base.Load(builder);
         }
     }
