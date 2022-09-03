@@ -14,7 +14,6 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            // category list
             return View();
         }
 

@@ -18,12 +18,6 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork.SaveChanges();
         }
 
-        public void AddRange(IEnumerable<Course> entities)
-        {
-            _edxUnitOfWork.CourseRepository.AddRange(entities);
-            _edxUnitOfWork.SaveChanges();
-        }
-
         public IQueryable<Course> Find(Expression<Func<Course, bool>> predicate)
         {
             return _edxUnitOfWork.CourseRepository.Find(predicate).AsQueryable();
@@ -42,12 +36,6 @@ namespace OnlineEdx.Infrastructure.Services
         public void Remove(Course entity)
         {
             _edxUnitOfWork.CourseRepository.Remove(entity);
-            _edxUnitOfWork.SaveChanges();
-        }
-
-        public void RemoveRange(IEnumerable<Course> entities)
-        {
-            _edxUnitOfWork.CourseRepository.RemoveRange(entities);
             _edxUnitOfWork.SaveChanges();
         }
 

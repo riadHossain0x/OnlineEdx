@@ -6,12 +6,11 @@ namespace OnlineEdx.Data
     {
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
+        Task<(IList<TEntity> data, int total, int totalDisplay)> GetDynamicAsync(
+            Expression<Func<TEntity, bool>> filter = null!, string orderBy = null!, int pageIndex = 1, int pageSize = 10);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         void Add(TEntity entity);
-        void AddRange(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
         void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entities);
-
     }
 }

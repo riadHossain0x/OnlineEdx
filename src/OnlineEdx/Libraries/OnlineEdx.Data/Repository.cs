@@ -1,5 +1,8 @@
 ﻿using NHibernate;
+using NHibernate.Criterion;
+using NHibernate.Linq;
 using OnlineEdx.Data;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
 namespace OnlineEdx.Data
@@ -18,6 +21,32 @@ namespace OnlineEdx.Data
             return _session.Get<TEntity>(id);
         }
 
+        public async virtual Task<(IList<TEntity> data, int total, int totalDisplay)> GetDynamicAsync(
+            Expression<Func<TEntity, bool>> filter = null!, string orderBy = null!, int pageIndex = 1, int pageSize = 10)
+        {
+            IQueryable<TEntity> query = _session.Query<TEntity>();
+            var total = query.Count();
+            var totalDisplay = query.Count();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+                totalDisplay = query.Count();
+            }
+
+            if (orderBy != null)
+            {
+                var result = query.OrderBy(orderBy).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                return (await result.ToListAsync(), total, totalDisplay);
+            }
+            else
+            {
+                var result = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                return (await result.ToListAsync(), total, totalDisplay);
+            }
+
+        }
+
         public IEnumerable<TEntity> GetAll()
         {
             return _session.Query<TEntity>().ToList();
@@ -33,25 +62,9 @@ namespace OnlineEdx.Data
             _session.SaveAsync(entity);
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
-        {
-            foreach (var entity in entities)
-            {
-                Add(entity);
-            }
-        }
-
         public void Remove(TEntity entity)
         {
             _session.Delete(entity);
-        }
-
-        public void RemoveRange(IEnumerable<TEntity> entities)
-        {
-            foreach (var entity in entities)
-            {
-                Remove(entity);
-            }
         }
 
         public void Update(TEntity entity)
