@@ -56,7 +56,8 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(Guid id)
         {
             try
@@ -115,7 +116,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
             {
                 _logger.LogError(ex, ex.Message);
                 ViewResponse(ex.Message, ResponseTypes.Error);
-                return RedirectToAction(nameof(Index));
+                return View(model);
             }
         }
     }
