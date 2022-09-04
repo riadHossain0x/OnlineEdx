@@ -94,5 +94,24 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 			model.GetCourse(model.Id);
 			return View(model);
 		}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                var model = _scope.Resolve<DeleteCourseModel>();
+                model.DeleteCourse(id);
+
+                ViewResponse("Category successfully deleted.", ResponseTypes.Success);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                ViewResponse(ex.Message, ResponseTypes.Error);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
