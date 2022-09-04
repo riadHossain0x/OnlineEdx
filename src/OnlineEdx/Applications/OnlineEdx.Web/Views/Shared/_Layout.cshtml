@@ -65,30 +65,9 @@
                             <button class="btn-icon btn-light btn">  <i class="fa fa-search"></i> </button>
                         </div>
                     </form> <!-- form end.// -->
-
                     <div class="widgets-wrap d-none d-xl-flex">
-
-                        <div class="widget-header ms-2">
-                            <a asp-action="Login" asp-controller="Account" class="icon icon-sm rounded-circle bg-gray-200">
-                                <i class="fa fa-user"></i>
-                            </a>
-                        </div>
-
-                        <div class="widget-header ms-2">
-                            <a href="#" class="icon icon-sm rounded-circle bg-gray-200">
-                                <i class="fa fa-heart"></i>
-                            </a>
-                        </div>
-
-                        <div class="widget-header  ms-2">
-                            <a href="#" class="icon icon-sm rounded-circle bg-gray-200">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span class="notify">0</span>
-                            </a>
-                        </div>
-
+                        <partial name="_LoginPartial"/>
                     </div>
-
                 </div> <!-- collapse end.// -->
             </div> <!-- container end.// -->
         </nav> <!-- navbar end.// -->
