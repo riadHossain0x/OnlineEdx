@@ -12,7 +12,8 @@
 
     <!-- Bootstrap css -->
     <link href="~/alistyle/css/bootstrap.css?v=2.0" rel="stylesheet" type="text/css" />
-
+    <!-- Toastr css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" type="text/css" rel="stylesheet">
     <!-- Custom css -->
     <link href="~/alistyle/css/ui.css?v=2.0" rel="stylesheet" type="text/css" />
     <link href="~/alistyle/css/responsive.css?v=2.0" rel="stylesheet" type="text/css" />
@@ -25,7 +26,7 @@
             min-height: 82vh;
         }
     </style>
-
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
 
@@ -75,7 +76,7 @@
     </header> <!-- section-header end.// -->
 
     <section class="section-content bg padding-y">
-        <partial name="_ResponsePartial" />
+        <partial name="_ResponsePartial"/>
         @RenderBody()
     </section> <!--   SECTION CONTENT END.//   -->
     <footer class="section-footer bg-white shadow">
@@ -163,7 +164,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/alistyle/js/script.js?v=1.0"></script>
+    <!-- Toastr css -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>
