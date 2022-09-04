@@ -1,50 +1,214 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OnlineEdx.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/OnlineEdx.Web.styles.css" asp-append-version="true" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Type some info">
+    <meta name="author" content="Type name">
+
+    <title>Website title - bootstrap html template</title>
+
+    <!-- Bootstrap css -->
+    <link href="~/alistyle/css/bootstrap.css?v=2.0" rel="stylesheet" type="text/css" />
+
+    <!-- Custom css -->
+    <link href="~/alistyle/css/ui.css?v=2.0" rel="stylesheet" type="text/css" />
+    <link href="~/alistyle/css/responsive.css?v=2.0" rel="stylesheet" type="text/css" />
+
+    <!-- Font awesome 5 -->
+    <link href="~/alistyle/fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
+
+    <style>
+        .section-content {
+            min-height: 82vh;
+        }
+    </style>
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineEdx.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+    <header class="section-header border-bottom">
+
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="http://bootstrap-ecommerce.com">
+                    <img src="~/admintheme/images/logo.svg" height="40" class="logo">
+                </a>
+
+                <div class="d-flex align-items-center">
+                    <div class="d-xl-none me-2">
+                        <a href="" class="btn btn-light"> <i class="fa fa-user"></i> </a>
+                        <a href="" class="btn btn-light"> <i class="fa fa-heart"></i> </a>
+                        <a href="" class="btn btn-light"> Cart (2)</a>
+                    </div>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_main" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar_main">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" href="#">Home </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" href="#">Men</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Women</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Kids</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Accessory</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle nav-link" href="#" type="button" data-bs-toggle="dropdown">
+                                More
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li> <a class="dropdown-item" href="#">Foods and Drink</a> </li>
+                                <li> <a class="dropdown-item" href="#">Home interior</a>  </li>
+                                <li>  <hr class="dropdown-divider"> </li>
+                                <li> <a class="dropdown-item" href="#">Category name</a> </li>
+                                <li>  <a class="dropdown-item" href="#">Another category</a> </li>
+                            </ul>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+                    <form class="me-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <button class="btn-icon btn-light btn">  <i class="fa fa-search"></i> </button>
+                        </div>
+                    </form> <!-- form end.// -->
+
+                    <div class="widgets-wrap d-none d-xl-flex">
+
+                        <div class="widget-header ms-2">
+                            <a href="#" class="icon icon-sm rounded-circle bg-gray-200">
+                                <i class="fa fa-user"></i>
+                            </a>
+                        </div>
+
+                        <div class="widget-header ms-2">
+                            <a href="#" class="icon icon-sm rounded-circle bg-gray-200">
+                                <i class="fa fa-heart"></i>
+                            </a>
+                        </div>
+
+                        <div class="widget-header  ms-2">
+                            <a href="#" class="icon icon-sm rounded-circle bg-gray-200">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="notify">0</span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div> <!-- collapse end.// -->
+            </div> <!-- container end.// -->
+        </nav> <!-- navbar end.// -->
+
+    </header> <!-- section-header end.// -->
+
+    <section class="section-content bg padding-y">
         <div class="container">
-            &copy; 2022 - OnlineEdx.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
+    </section> <!--   SECTION CONTENT END.//   -->
+    <footer class="section-footer bg-white shadow">
+        <div class="container">
+            <section class="footer-main padding-y">
+                <div class="row">
+                    <aside class="col-lg-4 col-12">
+                        <article class="me-lg-4 mb-4">
+                            <h6 class="title">Contact us</h6>
+                            <ul class="list-icon">
+                                <li class="mb-2">
+                                    <i class="icon fa fa-map-marker"></i>
+                                    Moscow, Russia, Fake Street, <br>
+                                    Area name, PO 10021
+                                </li>
+                                <li class="mb-2">
+                                    <i class="icon fa fa-phone"></i>   (800) 060-0730, (800) 060-0730
+                                </li>
+                                <li class="mb-2">
+                                    <i class="icon fa fa-envelope"></i>    info@mywebsite.com
+                                </li>
+                            </ul>
+                        </article>
+                    </aside> <!-- col end.// -->
+
+                    <aside class="col-lg col-6">
+                        <h6 class="title">Company</h6>
+                        <ul class="list-menu mb-4">
+                            <li>  <a href="#"> About us </a> </li>
+                            <li>  <a href="#"> Career </a> </li>
+                            <li>  <a href="#"> Find a store </a> </li>
+                            <li>  <a href="#"> Rules and terms </a> </li>
+                            <li>  <a href="#"> Sitemap </a> </li>
+                        </ul>
+                    </aside> <!-- col end.// -->
+
+                    <aside class="col-lg col-6">
+                        <h6 class="title"> Services </h6>
+                        <ul class="list-menu mb-4">
+                            <li>  <a href="#"> Help Center </a> </li>
+                            <li>  <a href="#"> Money refund </a> </li>
+                            <li>  <a href="#"> Order status </a> </li>
+                            <li>  <a href="#"> Shipping info </a> </li>
+                            <li>  <a href="#"> Open dispute </a>  </li>
+                        </ul>
+                    </aside> <!-- col end.// -->
+
+                    <aside class="col-lg col-6">
+                        <h6 class="title"> User center </h6>
+                        <ul class="list-menu mb-4">
+                            <li>  <a href="#"> Register </a> </li>
+                            <li>  <a href="#"> Sign in </a> </li>
+                            <li>  <a href="#"> Restore account </a> </li>
+                            <li>  <a href="#"> Track order </a>  </li>
+                        </ul>
+                    </aside> <!-- col end.// -->
+
+                    <aside class="col-lg col-6">
+                        <h6 class="title">Social</h6>
+                        <ul class="list-icon list-menu mb-4">
+                            <li><a href="#"> <i class="icon fab fa-facebook"></i> Facebook </a></li>
+                            <li><a href="#"> <i class="icon fab fa-twitter"></i> Twitter </a></li>
+                            <li><a href="#"> <i class="icon fab fa-instagram"></i> Instagram </a></li>
+                            <li><a href="#"> <i class="icon fab fa-youtube"></i> Youtube </a></li>
+                        </ul>
+                    </aside>
+
+                </div> <!-- row end.// -->
+            </section>
+
+            <section class="footer-bottom d-flex justify-content-between border-top">
+                <p class="text-muted mb-0"> &copy; 2021 Templatemount. All rights reserved.  </p>
+                <div>
+                    <i class="fab fa-lg fa-cc-visa"></i>
+                    <i class="fab fa-lg fa-cc-amex"></i>
+                    <i class="fab fa-lg fa-cc-mastercard"></i>
+                    <i class="fab fa-lg fa-cc-paypal"></i>
+                </div>
+            </section>
+
+        </div> <!-- container end.// -->
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/alistyle/js/script.js?v=1.0"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
