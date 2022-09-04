@@ -11,10 +11,12 @@ namespace OnlineEdx.Web.Areas.Admin.Models
     {
         [Required]
         [Display(Name = "Name")]
+        [MaxLength(50)]
         public string Name { get; set; } = null!;
 
         [Required]
         [Display(Name = "Description")]
+        [MaxLength(250)]
         public string Description { get; set; } = null!;
 
         [MaxFileSize(200)]
