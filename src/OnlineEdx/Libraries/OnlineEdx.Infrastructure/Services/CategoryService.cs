@@ -73,6 +73,19 @@ namespace OnlineEdx.Infrastructure.Services
             return categories;
         }
 
+        public IList<CategoryBO> GetShortedCategories()
+        {
+            var categories = _edxUnitOfWork.CategoryRepository.GetAll().AsQueryable().Select(x => new CategoryBO
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                Image = x.Image,
+                Courses = (IList<BusinessObjects.Course>)x.Courses.Take(2)
+            }).ToList();
+            return categories;
+        }
+
         public async Task<(int total, int totalDisplay, IList<CategoryBO> records)> GetCategorisAsync(int pageIndex, 
             int pageSize, string searchText, string orderBy)
         {

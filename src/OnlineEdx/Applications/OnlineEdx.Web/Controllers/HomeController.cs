@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Autofac;
+using Microsoft.AspNetCore.Mvc;
 using OnlineEdx.Infrastructure.BusinessObjects;
 using OnlineEdx.Infrastructure.Entities;
 using OnlineEdx.Infrastructure.Services;
@@ -8,18 +9,25 @@ using System.Diagnostics;
 
 namespace OnlineEdx.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController<HomeController>
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ILifetimeScope scope)
+            : base(logger, scope)
         {
-            _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<HomeModel>();
+            try
+            {
+                model.LoadData();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+            return View(model);
         }
 
         public IActionResult Privacy()
