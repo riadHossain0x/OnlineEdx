@@ -51,5 +51,13 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+		[HttpGet]
+		public IActionResult Edit(Guid id)
+		{
+			var model = _scope.Resolve<EditCourseModel>();
+			model.GetCourse(id);
+			return View(model);
+		}
     }
 }

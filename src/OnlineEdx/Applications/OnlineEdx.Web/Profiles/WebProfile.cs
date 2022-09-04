@@ -24,6 +24,7 @@ namespace OnlineEdx.Web.Profiles
             CreateMap<Category, CreateCategoryModel>().ReverseMap();
             CreateMap<Category, EditCategoryModel>().ReverseMap();
             CreateMap<Course, CreateCourseModel>().ReverseMap();
+            CreateMap<Course, EditCourseModel>().ReverseMap();
         }
     }
 }

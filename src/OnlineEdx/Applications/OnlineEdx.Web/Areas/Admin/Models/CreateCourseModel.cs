@@ -37,7 +37,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 
 		private ICourseService _courseService = null!;
 		private ICategoryService _categoryService = null!;
-		private IFileService _fileService;
+		private IFileService _fileService = null!;
 
 		public CreateCourseModel()
 		{
