@@ -81,7 +81,14 @@ namespace OnlineEdx.Infrastructure.Services
                 Name = x.Name,
                 Description = x.Description,
                 Image = x.Image,
-                Courses = (IList<BusinessObjects.Course>)x.Courses.Take(2)
+                Courses = x.Courses.Take(4).Select(x => new BusinessObjects.Course 
+                { 
+                    Id = x.Id, 
+                    Title = x.Title,
+                    Description = x.Description,
+                    Image = x.Image,
+                    PreviewVideo = x.PreviewVideo,
+                }).ToList()
             }).ToList();
             return categories;
         }
