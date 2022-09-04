@@ -52,31 +52,10 @@
                 <div class="collapse navbar-collapse" id="navbar_main">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home </a>
+                            <a class="nav-link" asp-action="Index" asp-controller="Home">Home </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Men</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Women</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Kids</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Accessory</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle nav-link" href="#" type="button" data-bs-toggle="dropdown">
-                                More
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="#">Foods and Drink</a> </li>
-                                <li> <a class="dropdown-item" href="#">Home interior</a>  </li>
-                                <li>  <hr class="dropdown-divider"> </li>
-                                <li> <a class="dropdown-item" href="#">Category name</a> </li>
-                                <li>  <a class="dropdown-item" href="#">Another category</a> </li>
-                            </ul>
+                            <a class="nav-link" href="#">About</a>
                         </li>
                     </ul>
 
@@ -90,7 +69,7 @@
                     <div class="widgets-wrap d-none d-xl-flex">
 
                         <div class="widget-header ms-2">
-                            <a href="#" class="icon icon-sm rounded-circle bg-gray-200">
+                            <a asp-action="Login" asp-controller="Account" class="icon icon-sm rounded-circle bg-gray-200">
                                 <i class="fa fa-user"></i>
                             </a>
                         </div>
