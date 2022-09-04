@@ -81,5 +81,10 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork.CourseRepository.Update(courseEO);
             _edxUnitOfWork.SaveChanges();
         }
+
+        public async Task<(int total, int totalDisplay, IList<Course> records)> GetCoursesAsync(string categoryname, int pageIndex, int pageSize, string orderBy)
+        {
+            
+        }
     }
 }

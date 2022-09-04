@@ -12,9 +12,10 @@ namespace OnlineEdx.Web.Controllers
         {
         }
 
-        [Route("[controller]/all/{id?}")]
-        public IActionResult Index(string id)
+        [Route("[controller]/all/{name?}/{pn?}")]
+        public IActionResult Index(string name, int pn)
         {
+            var model = _scope.Resolve<GetCoursesHomeModel>();
             return View();
         }
 

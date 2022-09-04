@@ -14,7 +14,7 @@
                                     <a class="nav-link" asp-action="Index" asp-controller="Course">All Courses</a>
                                     @foreach (var category in Model.Categories)
                                     {
-                                        <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-id="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
+                                        <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-name="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
                                     }
                                 </nav>
                             </aside>
