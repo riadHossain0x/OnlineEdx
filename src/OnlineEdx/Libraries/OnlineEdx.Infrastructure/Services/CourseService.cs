@@ -76,6 +76,7 @@ namespace OnlineEdx.Infrastructure.Services
                 throw new InvalidOperationException("Course with same name already exists");
 
             var courseEO = _mapper.Map<CourseEO>(entity);
+            courseEO.Category = _mapper.Map<CategoryEO>(_categoryService.GetLazyById(courseEO.CategoryId));
 
             _edxUnitOfWork.CourseRepository.Update(courseEO);
             _edxUnitOfWork.SaveChanges();

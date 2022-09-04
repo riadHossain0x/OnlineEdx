@@ -69,5 +69,30 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 			model.GetCourse(id);
 			return View(model);
 		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(EditCourseModel model)
+		{
+			try
+			{
+				if (!ModelState.IsValid)
+					throw new InvalidOperationException("Please provide value for all fields");
+
+				model.ResolveDependency(_scope);
+				await model.UpdateCourseAsync();
+
+				ViewResponse("Course successfully updated.", ResponseTypes.Success);
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, ex.Message);
+				ViewResponse(ex.Message, ResponseTypes.Error);
+			}
+			model.GetCourse(model.Id);
+			return View(model);
+		}
     }
 }

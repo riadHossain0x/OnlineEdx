@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using OnlineEdx.Infrastructure.BusinessObjects;
 using OnlineEdx.Infrastructure.Services;
 using OnlineEdx.Web.Validations;
 using System.ComponentModel.DataAnnotations;
@@ -23,7 +24,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
         [MaxFileSize(200)]
         [FileType(new string[] { ".jpg", ".png", ".jpeg", ".gif" })]
         [Display(Name = "Image")]
-        public IFormFile ImageUrl { get; set; } = null!;
+        public IFormFile? ImageUrl { get; set; } = null!;
 
         [Required]
         [Display(Name = "Preview Video Url")]
@@ -36,7 +37,8 @@ namespace OnlineEdx.Web.Areas.Admin.Models
         public string? Image { get; set; } = null!;
 
         private ICourseService _courseService = null!;
-        private readonly ICategoryService _categoryService;
+        private ICategoryService _categoryService = null!;
+        private IFileService _fileService = null!;
 
         public EditCourseModel()
 		{
@@ -44,17 +46,20 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 		}
 
 		public EditCourseModel(IMapper mapper, ILifetimeScope scope, ICourseService courseService,
-            ICategoryService categoryService)
+            ICategoryService categoryService, IFileService fileService)
 			: base(mapper, scope)
 		{
 			_courseService = courseService;
             _categoryService = categoryService;
+            _fileService = fileService;
         }
 
 		public override void ResolveDependency(ILifetimeScope scope)
 		{
 			_scope = scope;
 			_courseService = _scope.Resolve<ICourseService>();
+            _categoryService = _scope.Resolve<ICategoryService>();
+            _fileService = _scope.Resolve<IFileService>();
 			base.ResolveDependency(scope);
 		}
 
@@ -69,5 +74,14 @@ namespace OnlineEdx.Web.Areas.Admin.Models
                 Value = x.Id.ToString()
             }).ToList();
         }
-	}
+
+        public async Task UpdateCourseAsync()
+        {
+            if (ImageUrl != null)
+                Image = await _fileService.StoreFileAsync(ImageUrl);
+
+            var course = _mapper.Map<Course>(this);
+            _courseService.Update(course);
+        }
+    }
 }
