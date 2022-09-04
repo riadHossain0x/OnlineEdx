@@ -12,6 +12,12 @@ namespace OnlineEdx.Web.Controllers
         {
         }
 
+        [Route("[controller]/all/{id?}")]
+        public IActionResult Index(string id)
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Details(Guid id)
         {

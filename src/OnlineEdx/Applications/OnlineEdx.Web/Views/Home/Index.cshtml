@@ -11,9 +11,10 @@
                         <div class="row">
                             <aside class="col-lg-3">
                                 <nav class="nav flex-column nav-pills">
+                                    <a class="nav-link" asp-action="Index" asp-controller="Course">All Courses</a>
                                     @foreach (var category in Model.Categories)
                                     {
-                                        <a class="nav-link" href="#"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
+                                        <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-id="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
                                     }
                                 </nav>
                             </aside>
@@ -74,7 +75,7 @@
 
                                                 <div class="bottom-wrap float-end">
                                                     <a href="#" class="btn btn-primary">Enroll</a>
-                                                    <a href="#" class="btn btn-light">Details</a>
+                                                    <a asp-action="Details" asp-controller="Course" asp-route-id="@course.Id" class="btn btn-warning">Details</a>
                                                 </div>  <!-- bottom-wrap.// -->
 
                                             </figure> <!-- card // -->
@@ -82,7 +83,7 @@
                                     }
                                 </div>
                                 <div class="row d-flex justify-content-center text-center">
-                                    <a asp-controller="Store" asp-action="Products" class="btn btn-light">
+                                    <a asp-action="Index" asp-controller="Course" asp-route-id="@category.Name" class="btn btn-light">
                                         <i class="fa fa-reorder"></i>  <span class="ms-1 d-none d-sm-inline-block">See More</span>
                                     </a>
                                 </div>
