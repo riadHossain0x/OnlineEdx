@@ -117,11 +117,8 @@
     </header> <!-- section-header end.// -->
 
     <section class="section-content bg padding-y">
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
+        <partial name="_ResponsePartial" />
+        @RenderBody()
     </section> <!--   SECTION CONTENT END.//   -->
     <footer class="section-footer bg-white shadow">
         <div class="container">
