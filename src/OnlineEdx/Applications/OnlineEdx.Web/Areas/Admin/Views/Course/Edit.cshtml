@@ -1,0 +1,54 @@
+﻿@model EditCourseModel
+@{
+	ViewData["PageNav"] = "Edit Course";
+}
+<section class="content-main" style="max-width: 720px">
+	<div class="card mb-4">
+		<div class="card-body">
+			<form asp-action="Edit" method="post" enctype="multipart/form-data" asp-antiforgery="true">
+				<div class="mb-4">
+					<label for="product_name" class="form-label" asp-for="Title"></label>
+					<input type="text" placeholder="Type here" class="form-control" asp-for="Title" id="product_name">
+					<span asp-validation-for="Title" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
+					<label class="form-label" asp-for="Description"></label>
+					<textarea placeholder="Type here" class="form-control" asp-for="Description" rows="4"></textarea>
+					<span asp-validation-for="Description" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
+					<label class="form-label" asp-for="CategoryId"></label>
+					<select asp-for="CategoryId" asp-items="Model.Categories" class="form-control">
+						<option value="">Select category</option>
+					</select>
+					<span asp-validation-for="CategoryId" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
+					<label class="form-label" asp-for="ImageUrl"></label>
+					<input class="form-control" type="file" asp-for="ImageUrl">
+					<span asp-validation-for="ImageUrl" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
+					<label class="form-label" asp-for="PreviewVideo"></label>
+					<input placeholder="Type here" class="form-control" asp-for="PreviewVideo" rows="4">
+					<span asp-validation-for="PreviewVideo" class="text-danger"></span>
+				</div>
+				<input type="text" asp-for="Id" hidden>
+				<input type="text" asp-for="Image" hidden>
+				<a asp-action="Index" class="btn btn-outline-danger"> &times; Cancel</a>
+				<button class="btn btn-primary" type="submit">Create</button>
+			</form>
+		</div>
+	</div> <!-- card end// -->
+
+</section> <!-- content-main end// -->
+@section Scripts
+	{
+	<partial name="_ValidationScriptsPartial" />
+	<!-- Image Upload Validation -->
+	<script src="~/js/validation.js"></script>
+}
