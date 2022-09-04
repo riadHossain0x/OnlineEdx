@@ -6,6 +6,7 @@ namespace OnlineEdx.Infrastructure.Services
     public interface ICategoryService
     {
         Category GetById(Guid id);
+        Category GetLazyById(Guid id);
         IList<Category> GetCategories();
         void Add(Category category);
         void Update(Category entity);

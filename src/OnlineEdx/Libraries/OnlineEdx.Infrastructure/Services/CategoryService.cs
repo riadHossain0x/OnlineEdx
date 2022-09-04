@@ -43,6 +43,24 @@ namespace OnlineEdx.Infrastructure.Services
             return _mapper.Map<CategoryBO>(categoryEO);
         }
 
+        public CategoryBO GetLazyById(Guid id)
+        {
+            var count = _edxUnitOfWork.CategoryRepository.Find(x => x.Id == id).Count();
+
+            if (count == 0)
+                throw new InvalidOperationException("Category not found, please try again.");
+
+            var categoryEO = _edxUnitOfWork.CategoryRepository.Find(x => x.Id == id).AsQueryable().Select(
+                x => new CategoryBO
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Image = x.Image
+                }).FirstOrDefault();
+            return _mapper.Map<CategoryBO>(categoryEO);
+        }
+
         public IList<CategoryBO> GetCategories()
         {
             var categories = _edxUnitOfWork.CategoryRepository.GetAll().AsQueryable().Select(x => new CategoryBO

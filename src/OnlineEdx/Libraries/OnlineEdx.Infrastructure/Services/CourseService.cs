@@ -1,5 +1,6 @@
 ﻿using OnlineEdx.Infrastructure.BusinessObjects;
 using CourseEO = OnlineEdx.Infrastructure.Entities.Course;
+using CategoryEO = OnlineEdx.Infrastructure.Entities.Category;
 using OnlineEdx.Infrastructure.UnitOfWorks;
 using AutoMapper;
 
@@ -9,20 +10,25 @@ namespace OnlineEdx.Infrastructure.Services
     {
         private readonly IEdxUnitOfWork _edxUnitOfWork;
         private readonly IMapper _mapper;
+        private readonly ICategoryService _categoryService;
 
-        public CourseService(IEdxUnitOfWork unitOfWork, IMapper mapper)
+        public CourseService(IEdxUnitOfWork unitOfWork, IMapper mapper, ICategoryService categoryService)
         {
             _edxUnitOfWork = unitOfWork;
             _mapper = mapper;
+            _categoryService = categoryService;
         }
         public void Add(Course course)
         {
             var count = _edxUnitOfWork.CourseRepository.Find(x => x.Title.ToLower() == course.Title.ToLower()).Count();
 
             if (count > 0)
-                throw new InvalidOperationException("Course already exists!");
+                throw new InvalidOperationException("Course with same name already exists!");
 
             var courseEO = _mapper.Map<CourseEO>(course);
+
+            courseEO.Category = _mapper.Map<CategoryEO>(_categoryService.GetLazyById(courseEO.CategoryId));
+
             _edxUnitOfWork.CourseRepository.Add(courseEO);
             _edxUnitOfWork.SaveChanges();
         }
@@ -34,8 +40,8 @@ namespace OnlineEdx.Infrastructure.Services
             if (count == 0)
                 throw new InvalidOperationException("Course not found, please try again.");
 
-            var CourseEO = _edxUnitOfWork.CourseRepository.Get(id);
-            return _mapper.Map<Course>(CourseEO);
+            var courseEO = _edxUnitOfWork.CourseRepository.Get(id);
+            return _mapper.Map<Course>(courseEO);
         }
 
         public void RemoveById(Guid id)

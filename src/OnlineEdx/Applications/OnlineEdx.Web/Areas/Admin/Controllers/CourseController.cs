@@ -27,7 +27,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateCourseModel model)
+        public async Task<IActionResult> Create(CreateCourseModel model)
         {
 			try
 			{
@@ -35,7 +35,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 					throw new InvalidOperationException("Please provide value for all fields");
 
 				model.ResolveDependency(_scope);
-				model.CreateCourse();
+				await model.CreateCourse();
 
                 ViewResponse("Course successfully created.", ResponseTypes.Success);
 				return RedirectToAction(nameof(Index));

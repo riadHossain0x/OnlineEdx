@@ -37,6 +37,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 
 		private ICourseService _courseService = null!;
 		private ICategoryService _categoryService = null!;
+		private IFileService _fileService;
 
 		public CreateCourseModel()
 		{
@@ -44,11 +45,12 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 		}
 
 		public CreateCourseModel(IMapper mapper, ILifetimeScope scope, 
-			ICourseService courseService, ICategoryService categoryService)
+			ICourseService courseService, ICategoryService categoryService, IFileService fileService)
 			: base(mapper, scope)
 		{
 			_courseService = courseService;
 			_categoryService = categoryService;
+			_fileService = fileService;
 		}
 
 		public override void ResolveDependency(ILifetimeScope scope)
@@ -56,6 +58,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 			_scope = scope;
 			_courseService = _scope.Resolve<ICourseService>();
 			_categoryService = _scope.Resolve<ICategoryService>();
+			_fileService = _scope.Resolve<IFileService>();
 			base.ResolveDependency(scope);
 		}
 
@@ -68,9 +71,10 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 			}).ToList();
         }
 
-		public void CreateCourse()
+		public async Task CreateCourse()
 		{
-			var course = _mapper.Map<Course>(this);
+            Image = await _fileService.StoreFileAsync(ImageUrl);
+            var course = _mapper.Map<Course>(this);
 			_courseService.Add(course);
 		}
 	}
