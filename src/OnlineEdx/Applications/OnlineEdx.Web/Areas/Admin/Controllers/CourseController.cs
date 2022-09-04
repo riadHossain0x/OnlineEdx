@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdx.Web.Areas.Admin.Models;
 using OnlineEdx.Web.Enums;
+using OnlineEdx.Web.Models;
 
 namespace OnlineEdx.Web.Areas.Admin.Controllers
 {
@@ -16,6 +17,15 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 		{
 			return View();
 		}
+
+        [HttpGet]
+        public async Task<JsonResult> GetCourses()
+        {
+            var dataTableModel = new DataTablesAjaxRequestModel(Request);
+            var model = _scope.Resolve<GetCoursesModel>();
+            var list = await model.GetCoursesAsync(dataTableModel);
+            return Json(list);
+        }
 
         [HttpGet]
         public IActionResult Create()

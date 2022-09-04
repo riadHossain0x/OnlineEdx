@@ -62,6 +62,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
         {
             var course = _courseService.GetById(id);
             _mapper.Map(course, this);
+            CategoryId = course.Category.Id;
             Categories = _categoryService.GetCategories().Select(x => new SelectListItem
             {
                 Text = x.Name,

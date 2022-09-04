@@ -17,6 +17,7 @@ namespace OnlineEdx.Web
             builder.RegisterType<EditCategoryModel>().AsSelf();
             builder.RegisterType<CreateCourseModel>().AsSelf();
             builder.RegisterType<EditCourseModel>().AsSelf();
+            builder.RegisterType<GetCoursesModel>().AsSelf();
             base.Load(builder);
         }
     }

@@ -57,7 +57,7 @@ namespace OnlineEdx.Infrastructure.Services
             _edxUnitOfWork.SaveChanges();
         }
 
-        public async Task<(int total, int totalDisplay, IList<Course> records)> GetCourseAsync(int pageIndex,
+        public async Task<(int total, int totalDisplay, IList<Course> records)> GetCoursesAsync(int pageIndex,
             int pageSize, string searchText, string orderBy)
         {
             var result = await _edxUnitOfWork.CourseRepository.GetDynamicAsync(x => x.Title.Contains(searchText), orderBy, 
