@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["PageNav"] = "Category List";
+    ViewData["PageNav"] = "Course List";
 }
 @section Styles
     {
@@ -19,20 +19,22 @@
                         </div>
                         <div class="col-6">
                             <div class="float-end">
-                                <a asp-action="Create" asp-controller="Category" class="btn btn-primary btn-sm text-white">Add New Category</a>
+                                <a asp-action="Create" asp-controller="Course" class="btn btn-primary btn-sm text-white">Add New Course</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive px-2">
-                    <table id="category" class="table table-bordered table-striped table-bordered" style="width:100%">
+                    <table id="course" class="table table-bordered table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th style ="width:8%"></th>
-                                <th>Name</th>
+                                <th>Title</th>
                                 <th>Description</th>
-                                <th style="width:13%">Action</th>
+                                <th>Category</th>
+                                <th>Preview Video</th>
+                                <th style="width:10%">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -50,25 +52,21 @@
     <script src="~/admintheme/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
     <script>
         $(function () {
-            $('#category').DataTable({
+            $('#course').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
-                    "url": "/admin/category/getcategories",
+                    "url": "/admin/course/getcourses",
                 },
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": 3,
+                        "targets": 5,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-success btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/details/${data}'" value='${data}'>
-                                                                                    <i class='fa fa-info-circle'></i>
-                                                                                    </i>
-                                                                                </button>
-                                                                                <button type="submit" class="btn btn-warning btn-sm rounded-cirlce" onclick="window.location.href='/admin/category/edit/${data}'" value='${data}'>
+                            return `<button type="submit" class="btn btn-success btn-sm" onclick="window.location.href='/admin/course/edit/${data}'" value='${data}'>
                                                                                     <i class='fa fa-edit'></i>
                                                                                 </button>
-                                                                                <button type="submit" class="btn btn-danger btn-sm rounded-cirlce show-bs-modal" data-id='${data}' value='${data}'>
+                                                                                <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
                                                                                     <i class='fa fa-trash-o'></i>
                                                                                 </button>`;
                         },
@@ -84,12 +82,12 @@
                 ]
             });
 
-            $('#category').on('click', '.show-bs-modal', function (event) {
+            $('#course').on('click', '.show-bs-modal', function (event) {
                 var id = $(this).data("id");
                 var modal = $("#modal-default");
                 modal.find('.modal-body p').text('Are you sure you want to delete this record?');
                 $("#deleteId").val(id);
-                $("#deleteForm").attr("action", "/admin/category/delete");
+                $("#deleteForm").attr("action", "/admin/course/delete");
                 modal.modal('show');
             });
 

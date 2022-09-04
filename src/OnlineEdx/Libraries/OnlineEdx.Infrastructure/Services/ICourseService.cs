@@ -1,21 +1,15 @@
-﻿using FluentNHibernate.Data;
-using OnlineEdx.Infrastructure.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using OnlineEdx.Infrastructure.BusinessObjects;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineEdx.Infrastructure.Services
 {
     public interface ICourseService
     {
-        Course Get(Guid id);
-        IQueryable<Course> GetAll();
-        IQueryable<Course> Find(Expression<Func<Course, bool>> predicate);
+        Course GetById(Guid id);
+        Task<(int total, int totalDisplay, IList<Course> records)> GetCoursesAsync(int pageIndex,
+            int pageSize, string searchText, string orderBy);
         void Add(Course category);
         void Update(Course entity);
-        void Remove(Course entity);
+        void RemoveById(Guid Id);
     }
 }

@@ -1,15 +1,15 @@
-﻿@model CreateCategoryModel
+﻿@model CreateCourseModel
 @{
-	ViewData["PageNav"] = "Create Category";
+	ViewData["PageNav"] = "Create Course";
 }
 <section class="content-main" style="max-width: 720px">
 	<div class="card mb-4">
 		<div class="card-body">
 			<form asp-action="Create" method="post" enctype="multipart/form-data" asp-antiforgery="true">
 				<div class="mb-4">
-					<label for="product_name" class="form-label" asp-for="Name"></label>
-					<input type="text" placeholder="Type here" class="form-control" asp-for="Name" id="product_name">
-					<span asp-validation-for="Name" class="text-danger"></span>
+					<label for="product_name" class="form-label" asp-for="Title"></label>
+					<input type="text" placeholder="Type here" class="form-control" asp-for="Title" id="product_name">
+					<span asp-validation-for="Title" class="text-danger"></span>
 				</div>
 
 				<div class="mb-4">
@@ -19,9 +19,23 @@
 				</div>
 
 				<div class="mb-4">
+					<label class="form-label" asp-for="CategoryId"></label>
+					<select asp-for="CategoryId" asp-items="Model.Categories" class="form-control">
+						<option value="">Select category</option>
+					</select>
+					<span asp-validation-for="CategoryId" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
 					<label class="form-label" asp-for="ImageUrl"></label>
 					<input class="form-control" type="file" asp-for="ImageUrl">
 					<span asp-validation-for="ImageUrl" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
+					<label class="form-label" asp-for="PreviewVideo"></label>
+					<input placeholder="Type here" class="form-control" asp-for="PreviewVideo" rows="4">
+					<span asp-validation-for="PreviewVideo" class="text-danger"></span>
 				</div>
 
 				<a asp-action="Index" class="btn btn-outline-danger"> &times; Cancel</a>
@@ -31,8 +45,9 @@
 	</div> <!-- card end// -->
 
 </section> <!-- content-main end// -->
-@section Scripts {
+@section Scripts 
+{
 	<partial name="_ValidationScriptsPartial" />
 	<!-- Image Upload Validation -->
-	<script src="~/js/validation.js"></script>
+   <script src="~/js/validation.js"></script>
 }

@@ -11,8 +11,8 @@
             <span class="text">Course</span>
         </a>
         <div class="submenu">
-            <a>Add New Course</a>
-            <a>List of Course</a>
+            <a asp-action="Create" asp-controller="Course">Add New Course</a>
+            <a asp-action="Index" asp-controller="Course">List of Course</a>
         </div>
     </li>
     <li class="menu-item has-submenu">
@@ -21,8 +21,8 @@
             <span class="text">Category</span>
         </a>
         <div class="submenu">
-            <a asp-action="Create">Add New Category</a>
-            <a asp-action="Index">List of Category</a>
+            <a asp-action="Create" asp-controller="Category">Add New Category</a>
+            <a asp-action="Index" asp-controller="Category">List of Category</a>
         </div>
     </li>
 </ul>
