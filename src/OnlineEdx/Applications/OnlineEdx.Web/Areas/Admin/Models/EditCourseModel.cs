@@ -15,7 +15,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 
         [Required]
         [Display(Name = "Title")]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string Title { get; set; } = null!;
 
         [Required]
@@ -30,6 +30,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
 
         [Required]
         [Display(Name = "Preview Video Url")]
+        [Url]
         [MaxLength(250)]
         public string PreviewVideo { get; set; } = null!;
         public List<SelectListItem>? Categories { get; set; } = null!;

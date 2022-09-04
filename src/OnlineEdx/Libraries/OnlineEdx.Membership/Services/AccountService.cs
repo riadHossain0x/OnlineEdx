@@ -68,7 +68,7 @@ namespace OnlineEdx.Membership.Services
             var result = await _userManager.CreateAsync(userEntity, user.Password);
             if (result.Succeeded)
             {
-                await RolesAsync(userEntity);
+                //await RolesAsync(userEntity);
             }
             return result;
         }
