@@ -6,6 +6,6 @@ namespace OnlineEdx.Infrastructure.Entities.Membership
     {
         public virtual string FirstName { get; set; } = null!;
         public virtual string LastName { get; set; } = null!;
-        public virtual List<Enroll> Enrolls { get; set; } = null!;
+        public virtual IList<Enroll>? Enrolls { get; set; } = null!;
     }
 }
