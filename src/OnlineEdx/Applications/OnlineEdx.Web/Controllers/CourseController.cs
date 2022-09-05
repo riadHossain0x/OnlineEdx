@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
+using OnlineEdx.Membership.Services;
 using OnlineEdx.Web.Enums;
 using OnlineEdx.Web.Models;
 
@@ -41,6 +42,5 @@ namespace OnlineEdx.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-
     }
 }

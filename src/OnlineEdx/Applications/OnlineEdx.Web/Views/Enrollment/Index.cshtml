@@ -1,0 +1,55 @@
+﻿@model EnrollCourseModel
+<section class="padding-y bg-light">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-9">
+                @if (Model.Courses != null)
+                {
+                    @foreach (var item in Model.Courses)
+                    {
+                        <article class="card card-body mb-3">
+                            <div class="row gy-3 align-items-center">
+                                <div class="col-md-6">
+                                    <a asp-action="Details" asp-controller="Course" asp-route-id="@item.Id" class="itemside  align-items-center">
+                                        <div class="aside">
+                                            <img src="@string.Format($"/storage/images/{item.Image}")" height="72" width="72" class="img-thumbnail img-sm">
+                                        </div>
+                                        <figcaption class="info">
+                                            <p class="title">@item.Title </p>
+                                            @if (item.Description.Length > 45)
+                                            {
+                                                <span class="text-muted">@item.Description.Substring(0, 45)...</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">@item.Description</span>
+                                            }
+                                        </figcaption>
+                                    </a>
+                                </div> <!-- col.// -->
+                                <div class="col text-end">
+                                    <a asp-action="Details" asp-controller="Course" asp-route-id="@item.Id" class="btn btn-icon btn-light"> <i class="fa fa-info"></i> </a>
+                                </div>
+                            </div> <!-- row.// -->
+                        </article> <!-- card .// -->
+                    }
+                }
+                else
+                {
+                    <div class="text-center">There's no courses available.</div>
+                }
+            </main> <!-- col.// -->
+            <aside class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="admintheme/images/logo.svg" class="img-thumbnail" />
+                        <br />
+                        <dl class="dlist-align">
+                            <dd class="text-center text-success"><strong> “Learning is the only thing the mind never exhausts, never fears, and never regrets.” </strong> <br /><strong class="text-center text-danger">Leonardo da Vinci</strong></dd>
+                        </dl>
+                    </div> <!-- card-body.// -->
+                </div> <!-- card.// -->
+            </aside> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div>
+</section>

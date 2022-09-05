@@ -13,7 +13,7 @@
                                 <nav class="nav flex-column nav-pills">
                                     @if (Model.Categories != null)
                                     {
-                                        <a class="nav-link" asp-action="Index" asp-controller="Course">All Courses</a>
+                                        <p class="text-start">Categories</p>
                                         @foreach (var category in Model.Categories)
                                         {
                                             <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-name="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
@@ -37,60 +37,63 @@
             <!-- ================ SECTION PRODUCTS ================ -->
             <section class="padding-top">
                 <div class="container">
-                    @foreach (var category in Model.Categories)
+                    @if (Model.Categories != null)
                     {
-                        @if (category.Courses.Count > 0)
+                        @foreach (var category in Model.Categories!)
                         {
-                            <div id="category_products">
-                                <header class="section-heading">
-                                    <h3 class="section-title">@category.Name</h3>
-                                </header>
-                                <div class="row">
-                                    @foreach (var course in category.Courses)
-                                    {
-                                        <div class="col-lg-3 col-sm-6 col-12">
-                                            <figure class="card card-product-grid">
-                                                <div class="img-wrap">
-                                                    <img src=@string.Format($"storage/images/{course.Image}")>
-                                                </div>
-                                                <figcaption class="info-wrap">
-                                                    <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="text-warning"><strong>@course.Title</strong></a>
-                                                    @if (course.Description.Length > 45)
-                                                    {
-                                                        <p class="title">@course.Description.Substring(0,45)...</p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p class="title">@course.Description</p>
-                                                    }
-                                                    <div class="rating-wrap">
-                                                        <ul class="rating-stars">
-                                                            <li class="stars-active" style="width: 90%;">
-                                                                <img src="alistyle/images/misc/stars-active.svg" alt="">
-                                                            </li>
-                                                            <li>
-                                                                <img src="alistyle/images/misc/starts-disable.svg" alt="">
-                                                            </li>
-                                                        </ul>
-                                                        <span class="label-rating text-warning">4.5</span>
-                                                    </div> <!-- rating-wrap.// -->
-                                                </figcaption>
+                            @if (category.Courses.Count > 0)
+                            {
+                                <div id="category_products">
+                                    <header class="section-heading">
+                                        <h3 class="section-title">@category.Name</h3>
+                                    </header>
+                                    <div class="row">
+                                        @foreach (var course in category.Courses)
+                                        {
+                                            <div class="col-lg-3 col-sm-6 col-12">
+                                                <figure class="card card-product-grid">
+                                                    <div class="img-wrap">
+                                                        <img src=@string.Format($"storage/images/{course.Image}")>
+                                                    </div>
+                                                    <figcaption class="info-wrap">
+                                                        <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="text-warning"><strong>@course.Title</strong></a>
+                                                        @if (course.Description.Length > 45)
+                                                        {
+                                                            <p class="title">@course.Description.Substring(0,45)...</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="title">@course.Description</p>
+                                                        }
+                                                        <div class="rating-wrap">
+                                                            <ul class="rating-stars">
+                                                                <li class="stars-active" style="width: 90%;">
+                                                                    <img src="alistyle/images/misc/stars-active.svg" alt="">
+                                                                </li>
+                                                                <li>
+                                                                    <img src="alistyle/images/misc/starts-disable.svg" alt="">
+                                                                </li>
+                                                            </ul>
+                                                            <span class="label-rating text-warning">4.5</span>
+                                                        </div> <!-- rating-wrap.// -->
+                                                    </figcaption>
 
-                                                <div class="bottom-wrap float-end">
-                                                    <a href="#" class="btn btn-primary">Enroll</a>
-                                                    <a asp-action="Details" asp-controller="Course" asp-route-id="@course.Id" class="btn btn-warning">Details</a>
-                                                </div>  <!-- bottom-wrap.// -->
+                                                    <div class="bottom-wrap float-end">
+                                                        <a onclick="Enroll('@course.Id')" class="btn btn-primary">Enroll</a>
+                                                        <a asp-action="Details" asp-controller="Course" asp-route-id="@course.Id" class="btn btn-warning">Details</a>
+                                                    </div>  <!-- bottom-wrap.// -->
 
-                                            </figure> <!-- card // -->
-                                        </div> <!-- col.// -->
-                                    }
+                                                </figure> <!-- card // -->
+                                            </div> <!-- col.// -->
+                                        }
+                                    </div>
+                                    <div class="row d-flex justify-content-center text-center">
+                                        <a asp-action="Index" asp-controller="Course" asp-route-name="@category.Name" class="btn btn-light">
+                                            <i class="fa fa-reorder"></i>  <span class="ms-1 d-none d-sm-inline-block">See More</span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="row d-flex justify-content-center text-center">
-                                    <a asp-action="Index" asp-controller="Course" asp-route-name="@category.Name" class="btn btn-light">
-                                        <i class="fa fa-reorder"></i>  <span class="ms-1 d-none d-sm-inline-block">See More</span>
-                                    </a>
-                                </div>
-                            </div>
+                            }
                         }
                     }
                 </div> <!-- container end.// -->
@@ -99,3 +102,6 @@
         </main>
     </div>
 </section>
+@section Scripts{
+    <partial name="_EnrollScriptPartial" />
+}

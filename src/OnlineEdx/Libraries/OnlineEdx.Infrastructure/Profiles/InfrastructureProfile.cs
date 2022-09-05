@@ -5,6 +5,8 @@ using CategoryEO = OnlineEdx.Infrastructure.Entities.Category;
 using CategoryBO = OnlineEdx.Infrastructure.BusinessObjects.Category;
 using CourseEO = OnlineEdx.Infrastructure.Entities.Course;
 using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Course;
+using EnrollEO = OnlineEdx.Infrastructure.Entities.Enroll;
+using EnrollBO = OnlineEdx.Infrastructure.BusinessObjects.Enroll;
 
 namespace OnlineEdx.Infrastructure.Profiles
 {
@@ -15,6 +17,7 @@ namespace OnlineEdx.Infrastructure.Profiles
             CreateMap<ApplicationUserEO, ApplicationUserBO>().ReverseMap();
             CreateMap<CategoryBO, CategoryEO>().ReverseMap();
             CreateMap<CourseBO, CourseEO>().ReverseMap();
+            CreateMap<EnrollBO, EnrollEO>().ReverseMap();
         }
     }
 }

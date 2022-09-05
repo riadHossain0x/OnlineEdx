@@ -22,6 +22,7 @@ namespace OnlineEdx.Web
             builder.RegisterType<HomeModel>().AsSelf();
             builder.RegisterType<CourseDetailsModel>().AsSelf();
             builder.RegisterType<GetCoursesHomeModel>().AsSelf();
+            builder.RegisterType<EnrollCourseModel>().AsSelf();
             base.Load(builder);
         }
     }

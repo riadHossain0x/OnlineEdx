@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace OnlineEdx.Infrastructure.BusinessObjects
 {
 	public class Course
@@ -15,5 +10,6 @@ namespace OnlineEdx.Infrastructure.BusinessObjects
         public virtual string PreviewVideo { get; set; } = null!;
         public virtual Guid CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
+        public virtual IList<Enroll>? Enrolls { get; set; } = null!;
     }
 }

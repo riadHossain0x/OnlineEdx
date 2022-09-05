@@ -62,6 +62,16 @@ namespace OnlineEdx.Data
             _session.SaveAsync(entity);
         }
 
+        public void AddOrUpdate(TEntity entity)
+        {
+            _session.SaveOrUpdate(entity);
+        }
+
+        public void Merge(TEntity entity)
+        {
+            _session.Merge(entity);
+        }
+
         public void Remove(TEntity entity)
         {
             _session.Delete(entity);
