@@ -72,6 +72,39 @@
                 }
                 <div class="text-center" id="pagingDiv">@Html.Raw(@Model.PaginationRaw)</div>
             </main> <!-- col.// -->
+            <aside class="col-lg-3 col-sm-6 d-lg-block">
+                <!-- COMPONENTS SIDEBAR -->
+                <div class="card">
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" class="title" data-bs-toggle="collapse" data-bs-target="#collapse_aside1" aria-expanded="true">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    Categories
+                                </a>
+                            </header>
+                            <div class="collapse show" id="collapse_aside1" style="">
+                                <div class="card-body">
+                                    <ul class="list-menu">
+                                        @if (ViewBag.Categories != null)
+                                        {
+                                            @foreach (var category in ViewBag.Categories)
+                                            {
+                                                <li>
+                                                    <a asp-controller="course" asp-action="index" asp-route-CategoryId="@category" class="d-inline fw-bold">@category.CategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div>
+                        </article> <!-- filter-group // -->
+                        <aside class="filter-group">
+                            <header class="card-header">
+                                <button class="btn btn-light w-100" type="submit">Apply</button>
+                            </header>
+                        </aside>
+                </div> <!-- card.// -->
+            </aside>
         </div> <!-- row.// -->
     </div> <!-- container .//  -->
 </section>
