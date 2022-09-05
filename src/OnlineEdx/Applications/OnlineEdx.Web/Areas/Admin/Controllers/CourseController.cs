@@ -48,7 +48,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 				await model.CreateCourse();
 
                 ViewResponse("Course successfully created.", ResponseTypes.Success);
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction("Index", "Course", new {Area = "Admin"});
             }
 			catch (Exception ex)
 			{
@@ -84,8 +84,8 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
 
 				ViewResponse("Course successfully updated.", ResponseTypes.Success);
 
-				return RedirectToAction(nameof(Index));
-			}
+                return RedirectToAction("Index", "Course", new { Area = "Admin" });
+            }
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, ex.Message);
@@ -111,7 +111,7 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
                 _logger.LogError(ex, ex.Message);
                 ViewResponse(ex.Message, ResponseTypes.Error);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Course", new { Area = "Admin" });
         }
     }
 }

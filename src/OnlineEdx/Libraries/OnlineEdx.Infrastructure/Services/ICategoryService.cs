@@ -7,7 +7,7 @@ namespace OnlineEdx.Infrastructure.Services
         Category GetById(Guid id);
         Category GetLazyById(Guid id);
         IList<Category> GetCategories();
-        IList<Category> GetShortedCategories();
+        IList<Category> GetCategoryWiseCourse();
         void Add(Category category);
         void Update(Category entity);
         Task<(int total, int totalDisplay, IList<Category> records)> GetCategorisAsync(int pageIndex, int pageSize, 

@@ -24,7 +24,7 @@ namespace OnlineEdx.Web.Models
 
         public void LoadData()
         {
-            Categories = _categoryService.GetShortedCategories().ToList();
+            Categories = _categoryService.GetCategoryWiseCourse().ToList();
         }
     }
 }

@@ -12,10 +12,18 @@ namespace OnlineEdx.Web.Controllers
         {
         }
 
-        [Route("[controller]/all/{id?}")]
-        public IActionResult Index(string id)
+        [Route("[controller]/all/{name?}/{pn?}")]
+        public async Task<IActionResult> Index(string name, int pn)
         {
-            return View();
+            var model = _scope.Resolve<GetCoursesHomeModel>();
+            model.CategoryName = name;
+            model.PageIndex = (pn == 0) ? 1 : pn;
+
+            await model.GetFilteredCourses();
+            model.PaginationRaw = PagingModel.SetPaging(model.PageIndex, 5, model.Courses.filtered,
+                "activeLink", Url.Action("Index", "Course"), "disableLink");
+
+            return View(model);
         }
 
         [HttpGet]

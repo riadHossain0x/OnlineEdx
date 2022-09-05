@@ -21,6 +21,7 @@ namespace OnlineEdx.Web
             builder.RegisterType<DeleteCourseModel>().AsSelf();
             builder.RegisterType<HomeModel>().AsSelf();
             builder.RegisterType<CourseDetailsModel>().AsSelf();
+            builder.RegisterType<GetCoursesHomeModel>().AsSelf();
             base.Load(builder);
         }
     }

@@ -63,8 +63,8 @@ namespace OnlineEdx.Infrastructure.Services
             var result = await _edxUnitOfWork.CourseRepository.GetDynamicAsync(x => x.Title.Contains(searchText), orderBy, 
                 pageIndex, pageSize);
 
-            var categories = result.data.Select(x => _mapper.Map<Course>(x)).ToList();
-            return (result.total, result.totalDisplay, categories);
+            var courses = result.data.Select(x => _mapper.Map<Course>(x)).ToList();
+            return (result.total, result.totalDisplay, courses);
         }
 
         public void Update(Course entity)
@@ -80,6 +80,16 @@ namespace OnlineEdx.Infrastructure.Services
 
             _edxUnitOfWork.CourseRepository.Update(courseEO);
             _edxUnitOfWork.SaveChanges();
+        }
+
+        public async Task<(int total, int totalDisplay, IList<Course> records)> GetCoursesAsync(string categoryname, 
+            int pageIndex, int pageSize)
+        {
+            var result = await _edxUnitOfWork.CourseRepository.GetDynamicAsync(x => (categoryname != null) ? 
+            x.Category.Name == categoryname: x.Title != null, null!, pageIndex, pageSize);
+
+            var courses = result.data.Select(x => _mapper.Map<Course>(x)).ToList();
+            return (result.total, result.totalDisplay, courses);
         }
     }
 }
