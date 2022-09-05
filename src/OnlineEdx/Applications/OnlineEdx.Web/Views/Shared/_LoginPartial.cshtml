@@ -4,12 +4,12 @@
 @if (SignInManager.IsSignedIn(User))
 {
    
-    <button class="dropdown-item fs-6">
+    <a asp-action="Index" asp-controller="Enrollment" class="dropdown-item fs-6">
         <div class="d-flex align-items-center account-option">
             <i class="fa fa-shopping-cart"></i>
             <span class="ms-3">My Courses</span>
         </div>
-    </button>
+    </a>
     <form class="form-inline" asp-area="" asp-controller="Account" asp-action="Logout"
       asp-route-returnUrl="@Url.Action("Logout", "Account", new { area = "" })">
         <button type="submit" class="dropdown-item fs-6">
