@@ -85,8 +85,8 @@ namespace OnlineEdx.Infrastructure.Services
         public async Task<(int total, int totalDisplay, IList<Course> records)> GetCoursesAsync(string categoryname, 
             int pageIndex, int pageSize)
         {
-            var result = await _edxUnitOfWork.CourseRepository.GetDynamicAsync(x => x.Category.Name == categoryname, null!,
-                pageIndex, pageSize);
+            var result = await _edxUnitOfWork.CourseRepository.GetDynamicAsync(x => (categoryname != null) ? 
+            x.Category.Name == categoryname: x.Title != null, null!, pageIndex, pageSize);
 
             var courses = result.data.Select(x => _mapper.Map<Course>(x)).ToList();
             return (result.total, result.totalDisplay, courses);

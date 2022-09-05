@@ -11,10 +11,13 @@
                         <div class="row">
                             <aside class="col-lg-3">
                                 <nav class="nav flex-column nav-pills">
-                                    <a class="nav-link" asp-action="Index" asp-controller="Course">All Courses</a>
-                                    @foreach (var category in Model.Categories)
+                                    @if (Model.Categories != null)
                                     {
-                                        <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-name="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
+                                        <a class="nav-link" asp-action="Index" asp-controller="Course">All Courses</a>
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-name="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
+                                        }
                                     }
                                 </nav>
                             </aside>
@@ -51,7 +54,7 @@
                                                     <img src=@string.Format($"storage/images/{course.Image}")>
                                                 </div>
                                                 <figcaption class="info-wrap">
-                                                    <span class="text-warning"><strong>@course.Title</strong></span>
+                                                    <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="text-warning"><strong>@course.Title</strong></a>
                                                     @if (course.Description.Length > 45)
                                                     {
                                                         <p class="title">@course.Description.Substring(0,45)...</p>

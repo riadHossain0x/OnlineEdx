@@ -51,22 +51,11 @@
                                         <a href="#" class="img-wrap">
                                             <img src="@string.Format($"/storage/images/{course.Image}")" alt="No Image">
                                         </a>
-                                    </aside> 
+                                    </aside>
                                     <div class="col-xl-6 col-lg-5 col-md-7 col-sm-7">
                                         <div class="card-body">
                                             <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id"
-                                   class="h6 title mb-3"> @course.Title </a>
-                                            <div class="rating-wrap mb-2">
-                                                <ul class="rating-stars">
-                                                    <li class="stars-active" style="width: 90%;">
-                                                        <img src="alistyle/images/misc/stars-active.svg" alt="">
-                                                    </li>
-                                                    <li> <img src="alistyle/images/misc/starts-disable.svg" alt=""> </li>
-                                                </ul>
-                                                <span class="label-rating text-warning">4.5</span>
-                                                <i class="dot"></i>
-                                                <span class="label-rating text-muted">154 orders</span>
-                                            </div> <!-- rating-wrap.// -->
+                                   class="h6 title mb-3 text-warning"><strong> @course.Title </strong></a>
                                             @if (course.Description.Length > 45)
                                             {
                                                 <p class="title">@course.Description.Substring(0,45)...</p>
@@ -83,13 +72,14 @@
                                             <a class="btn btn-warning w-100" asp-controller="Course" asp-action="Details" asp-route-id="@course.Id"> Details </a>
 
                                         </div>
-                                    </aside> 
-                                </div> 
+                                    </aside>
+                                </div>
                             </article>
                         }
                         <div class="text-center" id="pagingDiv">@Html.Raw(@Model.PaginationRaw)</div>
                     }
-                    else{
+                    else
+                    {
                         <div class="text-center">No content found.</div>
                     }
                 }
@@ -109,6 +99,7 @@
                                 <nav class="nav flex-column nav-pills">
                                     @if (Model.Categories != null)
                                     {
+                                        <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-name="">All Courses</a>
                                         @foreach (var category in Model.Categories)
                                         {
                                             <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-name="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>

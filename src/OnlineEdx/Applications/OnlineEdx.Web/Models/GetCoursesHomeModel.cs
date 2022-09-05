@@ -26,7 +26,7 @@ namespace OnlineEdx.Web.Models
 
         internal async Task GetFilteredCourses()
         {
-            var result = await _courseService.GetCoursesAsync(CategoryName, PageIndex, 10);
+            var result = await _courseService.GetCoursesAsync(CategoryName, PageIndex, 5);
             Categories = _categoryService.GetCategories().ToList();
 
             var model = new List<Course>();
