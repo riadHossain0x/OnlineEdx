@@ -8,9 +8,6 @@ namespace OnlineEdx.Membership.Services
     {
         Task<IdentityResult> CreateUserAsync(ApplicationUserBO user);
         Task<IdentityResult> CreateExternalUserAsync(ApplicationUser user);
-        Task GenerateEmailConfirmationTokenAsync(ApplicationUser user);
-        Task SendEmailConfirmationEmail(string callbackUrl, string email);
-        Task SendForgotPasswordEmail(string callbackUrl, string email);
         Task<IdentityResult> ConfirmEmailAsync(string userId, string code);
         Task<ApplicationUser> GetUserByEmailAsync(string email);
         Task<SignInResult> PasswordSignInAsync(ApplicationUserBO user);
@@ -21,7 +18,6 @@ namespace OnlineEdx.Membership.Services
         Task SignOutAsync();
         bool IsAuthenticated();
         string GetUserId();
-        Task GenerateForgotPasswordTokenAsync(ApplicationUser user);
         Task<IdentityResult> ResetPasswordAsync(ApplicationUserBO user);
     }
 }

@@ -42,5 +42,11 @@ namespace OnlineEdx.Web.Controllers
             }
         }
 
+        public JsonResult Enroll(Guid id)
+        {
+
+            return null!;
+        }
+
     }
 }

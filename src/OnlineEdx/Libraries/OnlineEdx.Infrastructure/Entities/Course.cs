@@ -1,4 +1,5 @@
 ﻿using OnlineEdx.Data;
+using OnlineEdx.Infrastructure.Entities.Membership;
 
 namespace OnlineEdx.Infrastructure.Entities
 {
@@ -11,5 +12,6 @@ namespace OnlineEdx.Infrastructure.Entities
         public virtual string PreviewVideo { get; set; } = null!;
         public virtual Guid CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
+        public virtual List<Enroll> Enrolls { get; set; } = null!;
     }
 }

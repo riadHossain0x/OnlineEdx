@@ -12,8 +12,12 @@ namespace OnlineEdx.Infrastructure.Mapping.Membership
     {
         public ApplicationUserMap() : base(t => t.GeneratedBy.Guid()) // Primary key config
         {
-            Map(t => t.FirstName).Not.Nullable();
-            Map(t => t.LastName).Not.Nullable();
+            Map(x => x.FirstName).Not.Nullable();
+            Map(x => x.LastName).Not.Nullable();
+            HasMany(x => x.Enrolls)
+                .Cascade.All()
+                .Fetch.Join()
+                .Inverse().KeyColumn("ApplicationUserId");
         }
     }
 }

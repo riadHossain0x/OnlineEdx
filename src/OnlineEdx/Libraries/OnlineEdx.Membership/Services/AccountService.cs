@@ -73,41 +73,6 @@ namespace OnlineEdx.Membership.Services
             return result;
         }
 
-        public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
-        {
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-            var callbackUrl = _urlHelper.Action(
-            "ConfirmEmail",
-            "Account",
-            values: new
-            {
-                area = "",
-                userId = user.Id,
-                code = code,
-            },
-            protocol: _contextAccessor.ActionContext!.HttpContext.Request.Scheme);
-
-            await SendEmailConfirmationEmail(callbackUrl!, user.Email);
-        }
-
-        public async Task GenerateForgotPasswordTokenAsync(ApplicationUser user)
-        {
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            if (!string.IsNullOrEmpty(code))
-            {
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = _urlHelper.Action(
-                    "ResetPassword",
-                    "Account",
-                    values: new { userid = user.Id, code },
-                    protocol: _contextAccessor.ActionContext!.HttpContext.Request.Scheme);
-
-                await SendForgotPasswordEmail(callbackUrl!, user.Email);
-            }
-        }
-
         public async Task<IList<string>> GetCurrentUserRolesAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -146,16 +111,6 @@ namespace OnlineEdx.Membership.Services
         public async Task RolesAsync(ApplicationUser user)
         {
             await _userManager.AddToRolesAsync(user, new string[] { "User" });
-        }
-
-        public Task SendEmailConfirmationEmail(string callbackUrl, string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SendForgotPasswordEmail(string callbackUrl, string email)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task SignInAsync(string email)

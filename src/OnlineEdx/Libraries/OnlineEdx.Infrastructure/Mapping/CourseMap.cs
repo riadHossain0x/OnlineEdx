@@ -14,6 +14,10 @@ namespace OnlineEdx.Infrastructure.Mapping
             Map(x => x.Image);
             Map(x => x.PreviewVideo);
             References(x => x.Category).Column("CategoryId");
+            HasMany(x => x.Enrolls)
+                .Cascade.All()
+                .Fetch.Join()
+                .Inverse().KeyColumn("CourseId");
         }
     }
 }
