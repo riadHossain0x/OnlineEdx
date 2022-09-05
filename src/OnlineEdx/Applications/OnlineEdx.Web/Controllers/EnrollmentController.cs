@@ -13,8 +13,10 @@ namespace OnlineEdx.Web.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
+        { 
+            var model = _scope.Resolve<EnrollCourseModel>();
+            model.LoadEnrolledCourses();
+            return View(model);
         }
 
         public async Task<JsonResult> EnrollCourse(Guid id)

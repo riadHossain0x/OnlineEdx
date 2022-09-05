@@ -1,6 +1,7 @@
 ﻿using OnlineEdx.Infrastructure.UnitOfWorks;
 using OnlineEdx.Infrastructure.Entities.Membership;
 using OnlineEdx.Infrastructure.Entities;
+using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Course;
 using AutoMapper;
 
 namespace OnlineEdx.Infrastructure.Services
@@ -34,6 +35,20 @@ namespace OnlineEdx.Infrastructure.Services
 
             _edxUnitOfWork.EnrollmentRepository.Merge(enrollEntity);
             _edxUnitOfWork.SaveChanges();
+        }
+
+        public IList<CourseBO> GetEnrolledCourses(Guid userId)
+        {
+            var courseEO = _edxUnitOfWork.EnrollmentRepository.Find(x => x.ApplicationUser.Id == userId).Select(x => new Course
+            {
+                Id = x.Course.Id,
+                Title = x.Course.Title,
+                Description = x.Course.Description,
+                Image = x.Course.Image
+            });
+            var courseBO = _mapper.Map<IList<CourseBO>>(courseEO);
+
+            return courseBO;
         }
     }
 }
