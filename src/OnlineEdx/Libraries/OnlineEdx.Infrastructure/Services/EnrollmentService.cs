@@ -2,7 +2,9 @@
 using OnlineEdx.Infrastructure.Entities.Membership;
 using OnlineEdx.Infrastructure.Entities;
 using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Course;
+using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.Membership.ApplicationUser;
 using AutoMapper;
+using NHibernate.Criterion;
 
 namespace OnlineEdx.Infrastructure.Services
 {
@@ -50,5 +52,33 @@ namespace OnlineEdx.Infrastructure.Services
 
             return courseBO;
         }
+
+        public async Task<(int total, int totalDisplay, IList<EnrollStudent> records)> GetEnrolledUsersAsync( 
+            int pageIndex, int pageSize, string searchText, string orderBy)
+        {
+            var result = await _edxUnitOfWork.EnrollmentRepository
+                .GetDynamicAsync(x => x.Course.Title.Contains(searchText) || x.ApplicationUser.FirstName.Contains(searchText) ||
+                x.ApplicationUser.LastName.Contains(searchText), orderBy, pageIndex, pageSize);
+
+            var enrollStudents = result.data.Select(x => new EnrollStudent
+            {
+                FirstName = x.ApplicationUser.FirstName,
+                LastName = x.ApplicationUser.LastName,
+                Email = x.ApplicationUser.Email,
+                CourseTitle = x.Course.Title,
+                CourseCategory = x.Course.Category.Name
+            }).ToList();
+            //var applicationUsers = result.data.Select(x => _mapper.Map<ApplicationUserBO>(x)).ToList();
+            return (result.total, result.totalDisplay, enrollStudents);
+        }
+    }
+
+    public class EnrollStudent
+    {
+        public virtual string FirstName { get; set; } = null!;
+        public virtual string LastName { get; set; } = null!;
+        public virtual string Email { get; set; } = null!;
+        public virtual string CourseTitle { get; set; } = null!;
+        public virtual string CourseCategory { get; set; } = null!; 
     }
 }

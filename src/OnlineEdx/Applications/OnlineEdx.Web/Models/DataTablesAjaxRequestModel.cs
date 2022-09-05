@@ -30,6 +30,14 @@ namespace OnlineEdx.Web.Models
             }
         }
 
+        public string HeaderText
+        {
+            get
+            {
+                return _request.Headers["id"];
+            }
+        }
+
         public DataTablesAjaxRequestModel(HttpRequest request)
         {
             _request = request;
