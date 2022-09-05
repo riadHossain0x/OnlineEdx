@@ -1,7 +1,7 @@
 ﻿<script>
     function Enroll(id) {
         $.ajax({
-            url: '@Url.Action("EnrollCourse", "Enroll")',
+            url: '@Url.Action("EnrollCourse", "Enrollment")',
             type: 'GET',
             dataType: 'json',
             cache: false,
@@ -15,7 +15,7 @@
                 toastr.error(results);
             },
             error: function () {
-                toastr.error('Error occured');
+                toastr.error('You must be logged in to enroll a course.');
             }
         });
     }

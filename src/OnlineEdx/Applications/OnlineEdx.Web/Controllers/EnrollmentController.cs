@@ -1,15 +1,14 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineEdx.Infrastructure.Exceptions;
-using OnlineEdx.Web.Enums;
 using OnlineEdx.Web.Models;
 
 namespace OnlineEdx.Web.Controllers
 {
-    public class EnrollController : BaseController<EnrollController>
+    [Authorize]
+    public class EnrollmentController : BaseController<EnrollmentController>
     {
-        public EnrollController(ILogger<EnrollController> logger, ILifetimeScope scope) : base(logger, scope)
+        public EnrollmentController(ILogger<EnrollmentController> logger, ILifetimeScope scope) : base(logger, scope)
         {
         }
 
