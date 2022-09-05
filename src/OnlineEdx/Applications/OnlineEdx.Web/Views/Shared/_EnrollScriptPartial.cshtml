@@ -1,0 +1,22 @@
+﻿<script>
+    function Enroll(id) {
+        $.ajax({
+            url: '@Url.Action("Enroll", "Course")',
+            type: 'GET',
+            dataType: 'json',
+            cache: false,
+            data: { 'id': id },
+            success: function (results) {
+                if (results == true) {
+                    OnSuccess();
+                    toastr.success("Course successfully enrolled.");
+                    return;
+                }
+                toastr.error("Error occured! please try again.");
+            },
+            error: function () {
+                toastr.error('Error occured');
+            }
+        });
+    }
+</script>

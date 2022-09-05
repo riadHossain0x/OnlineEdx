@@ -79,7 +79,7 @@
                                                     </figcaption>
 
                                                     <div class="bottom-wrap float-end">
-                                                        <a href="#" class="btn btn-primary">Enroll</a>
+                                                        <a onclick="Enroll('@course.Id')" class="btn btn-primary">Enroll</a>
                                                         <a asp-action="Details" asp-controller="Course" asp-route-id="@course.Id" class="btn btn-warning">Details</a>
                                                     </div>  <!-- bottom-wrap.// -->
 
@@ -102,3 +102,6 @@
         </main>
     </div>
 </section>
+@section Scripts{
+    <partial name="_EnrollScriptPartial" />
+}

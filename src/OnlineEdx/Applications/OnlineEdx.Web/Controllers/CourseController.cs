@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
+using OnlineEdx.Membership.Services;
 using OnlineEdx.Web.Enums;
 using OnlineEdx.Web.Models;
 
@@ -7,9 +8,12 @@ namespace OnlineEdx.Web.Controllers
 {
     public class CourseController : BaseController<CourseController>
     {
-        public CourseController(ILogger<CourseController> logger, ILifetimeScope scope) 
+        private readonly IAccountService _accountService;
+
+        public CourseController(ILogger<CourseController> logger, ILifetimeScope scope, IAccountService accountService) 
             : base(logger, scope)
         {
+            _accountService = accountService;
         }
 
         [Route("[controller]/all/{name?}/{pn?}")]
@@ -44,7 +48,7 @@ namespace OnlineEdx.Web.Controllers
 
         public JsonResult Enroll(Guid id)
         {
-
+            var userID = _accountService.GetUserId();
             return null!;
         }
 
