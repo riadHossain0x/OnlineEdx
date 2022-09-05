@@ -1,5 +1,8 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineEdx.Infrastructure.Exceptions;
+using OnlineEdx.Web.Enums;
 using OnlineEdx.Web.Models;
 
 namespace OnlineEdx.Web.Controllers
@@ -17,9 +20,17 @@ namespace OnlineEdx.Web.Controllers
 
         public async Task<JsonResult> EnrollCourse(Guid id)
         {
-            var model = _scope.Resolve<EnrollCourseModel>();
-            await model.EnrollAsync(id);
-            return null!;
+            try
+            {
+                var model = _scope.Resolve<EnrollCourseModel>();
+                await model.EnrollAsync(id);
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return Json(ex.Message);
+            }
         }
     }
 }

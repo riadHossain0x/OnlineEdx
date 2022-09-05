@@ -10,6 +10,8 @@ namespace OnlineEdx.Data
             Expression<Func<TEntity, bool>> filter = null!, string orderBy = null!, int pageIndex = 1, int pageSize = 10);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         void Add(TEntity entity);
+        void AddOrUpdate(TEntity entity);
+        void Merge(TEntity entity);
         void Update(TEntity entity);
         void Remove(TEntity entity);
     }

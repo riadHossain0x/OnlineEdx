@@ -1,5 +1,5 @@
 ﻿using OnlineEdx.Data;
-using OnlineEdx.Infrastructure.BusinessObjects;
+using OnlineEdx.Infrastructure.Entities;
 
 namespace OnlineEdx.Infrastructure.Repositories
 {

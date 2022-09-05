@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineEdx.Infrastructure.BusinessObjects
 {
-    public class Enroll : IEntity<int>
+    public class Enroll
     {
         public virtual int Id { get; set; }
         public virtual Course Course { get; set; } = null!;

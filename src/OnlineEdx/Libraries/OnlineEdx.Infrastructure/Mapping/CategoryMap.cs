@@ -17,8 +17,10 @@ namespace OnlineEdx.Infrastructure.Mapping
             Map(x => x.Name);
             Map(x => x.Description);
             Map(x => x.Image);
-            HasMany(x => x.Courses).KeyColumn("CategoryId").Inverse()
-            .Cascade.All();
+            HasMany(x => x.Courses).KeyColumn("CategoryId")
+                .Inverse()
+                .LazyLoad()
+                .Cascade.All();
         }
     }
 

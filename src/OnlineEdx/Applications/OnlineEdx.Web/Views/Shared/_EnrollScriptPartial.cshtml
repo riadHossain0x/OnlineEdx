@@ -12,7 +12,7 @@
                     toastr.success("Course successfully enrolled.");
                     return;
                 }
-                toastr.error("Error occured! please try again.");
+                toastr.error(results);
             },
             error: function () {
                 toastr.error('Error occured');

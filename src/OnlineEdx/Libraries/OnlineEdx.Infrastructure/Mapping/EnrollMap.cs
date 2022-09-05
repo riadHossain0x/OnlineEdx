@@ -8,7 +8,7 @@ namespace OnlineEdx.Infrastructure.Mapping
         public EnrollMap()
         {
             Table("Enrolls");
-            Id(x => x.EnrollId).GeneratedBy.Identity();
+            Id(x => x.Id).GeneratedBy.Identity();
             References(x => x.Course)
                 .Not.Nullable()
                 .Cascade.SaveUpdate()

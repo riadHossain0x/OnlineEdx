@@ -13,7 +13,7 @@ namespace OnlineEdx.Infrastructure.Mapping
             Map(x => x.Description);
             Map(x => x.Image);
             Map(x => x.PreviewVideo);
-            References(x => x.Category).Column("CategoryId");
+            References(x => x.Category).Column("CategoryId").LazyLoad();
             HasMany(x => x.Enrolls).KeyColumn("CourseId")
                 .Fetch.Select()
                 .Inverse()
