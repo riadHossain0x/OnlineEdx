@@ -9,6 +9,9 @@ namespace OnlineEdx.Web.Models
     {
         public string CategoryName { get; set; } = null!;
         public int PageIndex { get; set; }
+        public (int total, int filtered, IList<Course> records) Courses { get; set; }
+
+        public string PaginationRaw { get; set; } = null!;
 
         private readonly ICourseService _courseService;
 
@@ -18,19 +21,18 @@ namespace OnlineEdx.Web.Models
             _courseService = courseService;
         }
 
-        internal async Task<(int total, int filtered, IList<Course> records)> GetFilteredCourses()
+        internal async Task GetFilteredCourses()
         {
-            var data = await _courseService.GetCoursesAsync(
-                CategoryName,
-                PageIndex,
-                10,
-                "Title");
+            var result = await _courseService.GetCoursesAsync(CategoryName, PageIndex, 1);
+
             var model = new List<Course>();
-            foreach (var course in data.records)
+            foreach (var course in result.records)
             {
                 model.Add(course);
             }
-            return (data.total, data.totalDisplay, model);
+
+            Courses = (result.total, result.totalDisplay, model);
+            //return (result.total, result.totalDisplay, model);
         }
     }
 }

@@ -1,1 +1,77 @@
-﻿
+﻿@model GetCoursesHomeModel
+@section Styles{
+    <style>
+        #pagingDiv a, #pagingDiv span {
+            display: inline-block;
+            padding: 2px 12px;
+            margin-right: 4px;
+            border-radius: 3px;
+            border: solid 1px #c0c0c0;
+            background: #0B5ED7;
+            font-size: .875em;
+            text-decoration: none;
+            color: #FFFFFF;
+            text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+        }
+
+            #pagingDiv a:hover {
+                background: #fefefe;
+                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+                background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+                color: #000000;
+            }
+
+            #pagingDiv a.active {
+                border: none;
+                background: #fefefe;
+                box-shadow: inset 0px 0px 8px rgba(255,255,255, .8), 0px 1px 0px rgba(255,255,255, .8);
+                color: #000000;
+            }
+
+        #pagingDiv span {
+            color: #f0f0f0;
+            background: #616161;
+        }
+    </style>
+}
+    <section class="padding-y bg-light">
+        <div class="container">
+
+            <div class="row">
+                <!--Main Product List-->
+                <main class="col-lg-9">
+                    @{
+                    if (@Model.Courses.total > 0)
+                    {
+                        foreach (var course in Model.Courses.records)
+                        {
+                            <article class="card card-product-list">
+                                <div class="row g-0">
+                                    <aside class="col-xl-3 col-lg-4 col-md-12 col-12">
+                                        <a href="#" class="img-wrap">
+                                            <img src="@string.Format($"/storage/images/{course.Image}")" alt="No Image">
+                                        </a>
+                                    </aside> <!-- col.// -->
+                                    <div class="col-xl-6 col-lg-5 col-md-7 col-sm-7">
+                                        <div class="card-body">
+                                            <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id"
+                                   class="h6 title mb-3"> @course.Title </a>
+                                        </div> <!-- info-main.// -->
+                                    </div> <!-- col.// -->
+                                    <aside class="col-xl-3 col-lg-3 col-md-5 col-sm-5">
+                                        <div class="info-aside">
+                                            <a id="enroll" onclick="Enroll(@course.Id)" class="btn btn-primary w-100 mb-2"> Enroll </a>
+                                            <a href="#" class="btn btn-warning w-100"> Details </a>
+
+                                        </div> <!-- info-aside.// -->
+                                    </aside> <!-- col.// -->
+                                </div> <!-- row.// -->
+                            </article> <!-- card-product .// -->
+                        }
+                    }
+                }
+                <div class="text-center" id="pagingDiv">@Html.Raw(@Model.PaginationRaw)</div>
+            </main> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div> <!-- container .//  -->
+</section>
