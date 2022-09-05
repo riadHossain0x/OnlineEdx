@@ -13,7 +13,7 @@
                                 <nav class="nav flex-column nav-pills">
                                     @if (Model.Categories != null)
                                     {
-                                        <a class="nav-link" asp-action="Index" asp-controller="Course">All Courses</a>
+                                        <p class="text-start">Categories</p>
                                         @foreach (var category in Model.Categories)
                                         {
                                             <a class="nav-link" asp-action="Index" asp-controller="Course" asp-route-name="@category.Name"><img src=@string.Format($"/storage/images/{category.Image}") width="25" height="25" /> @category.Name</a>
