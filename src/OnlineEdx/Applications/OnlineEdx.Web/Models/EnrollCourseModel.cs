@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using AutoMapper;
-using OnlineEdx.Infrastructure.Exceptions;
 using OnlineEdx.Infrastructure.Services;
 using OnlineEdx.Membership.Services;
 
