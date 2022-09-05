@@ -1,7 +1,7 @@
 ﻿<script>
     function Enroll(id) {
         $.ajax({
-            url: '@Url.Action("Enroll", "Course")',
+            url: '@Url.Action("EnrollCourse", "Enroll")',
             type: 'GET',
             dataType: 'json',
             cache: false,

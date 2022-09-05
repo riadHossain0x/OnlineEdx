@@ -8,12 +8,9 @@ namespace OnlineEdx.Web.Controllers
 {
     public class CourseController : BaseController<CourseController>
     {
-        private readonly IAccountService _accountService;
-
-        public CourseController(ILogger<CourseController> logger, ILifetimeScope scope, IAccountService accountService) 
+        public CourseController(ILogger<CourseController> logger, ILifetimeScope scope) 
             : base(logger, scope)
         {
-            _accountService = accountService;
         }
 
         [Route("[controller]/all/{name?}/{pn?}")]
@@ -45,12 +42,5 @@ namespace OnlineEdx.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-
-        public JsonResult Enroll(Guid id)
-        {
-            var userID = _accountService.GetUserId();
-            return null!;
-        }
-
     }
 }

@@ -35,32 +35,6 @@ namespace OnlineEdx.Membership.Services
             _mapper = mapper;
             _session = session;
         }
-        public async Task ClaimAsync(ApplicationUser user)
-        {
-            await _userManager.AddClaimAsync(user, new Claim("ViewTestPage", "true"));
-        }
-
-        public async Task<IdentityResult> ConfirmEmailAsync(string userId, string code)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-
-            return result;
-        }
-
-        public async Task<IdentityResult> CreateExternalUserAsync(ApplicationUser user)
-        {
-            var result = await _userManager.CreateAsync(user);
-
-            if (result.Succeeded)
-            {
-                await RolesAsync(user);
-            }
-
-            return result;
-        }
 
         public async Task<IdentityResult> CreateUserAsync(ApplicationUserBO user)
         {
@@ -83,6 +57,11 @@ namespace OnlineEdx.Membership.Services
         public async Task<ApplicationUser> GetUserByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
+        }
+
+        public async Task<ApplicationUser> GetUserAsync()
+        {
+            return await _userManager.FindByIdAsync(GetUserId());
         }
 
         public string GetUserId()
