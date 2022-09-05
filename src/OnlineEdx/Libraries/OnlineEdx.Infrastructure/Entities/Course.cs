@@ -12,6 +12,6 @@ namespace OnlineEdx.Infrastructure.Entities
         public virtual string PreviewVideo { get; set; } = null!;
         public virtual Guid CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
-        public virtual List<Enroll> Enrolls { get; set; } = null!;
+        public virtual IList<Enroll>? Enrolls { get; set; } = null!;
     }
 }

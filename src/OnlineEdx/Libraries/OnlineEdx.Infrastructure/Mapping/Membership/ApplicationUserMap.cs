@@ -15,7 +15,7 @@ namespace OnlineEdx.Infrastructure.Mapping.Membership
             Map(x => x.FirstName).Not.Nullable();
             Map(x => x.LastName).Not.Nullable();
             HasMany(x => x.Enrolls).KeyColumn("ApplicationUserId")
-                .Fetch.Join()
+                .Fetch.Select()
                 .Inverse()
                 .Cascade.All();
         }

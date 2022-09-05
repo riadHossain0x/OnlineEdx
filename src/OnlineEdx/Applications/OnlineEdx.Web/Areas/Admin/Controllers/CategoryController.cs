@@ -22,10 +22,18 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<JsonResult> GetCategories()
         {
-            var dataTableModel = new DataTablesAjaxRequestModel(Request);
-            var model = _scope.Resolve<GetCategoriesModel>();
-            var list = await model.GetCategoriesAsync(dataTableModel);
-            return Json(list);
+            try
+            {
+                var dataTableModel = new DataTablesAjaxRequestModel(Request);
+                var model = _scope.Resolve<GetCategoriesModel>();
+                var list = await model.GetCategoriesAsync(dataTableModel);
+                return Json(list);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+            return null!;
         }
 
         [HttpGet]
