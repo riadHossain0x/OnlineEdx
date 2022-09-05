@@ -73,7 +73,7 @@ namespace OnlineEdx.Infrastructure.Services
             return categories;
         }
 
-        public IList<CategoryBO> GetShortedCategories()
+        public IList<CategoryBO> GetCategoryWiseCourse()
         {
             var categories = _edxUnitOfWork.CategoryRepository.GetAll().AsQueryable().Select(x => new CategoryBO
             {

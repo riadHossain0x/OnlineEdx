@@ -54,7 +54,7 @@
                                                     <span class="text-warning"><strong>@course.Title</strong></span>
                                                     @if (course.Description.Length > 45)
                                                     {
-                                                        <p class="title">@course.Description.Substring(0,45)</p>
+                                                        <p class="title">@course.Description.Substring(0,45)...</p>
                                                     }
                                                     else
                                                     {
@@ -83,7 +83,7 @@
                                     }
                                 </div>
                                 <div class="row d-flex justify-content-center text-center">
-                                    <a asp-action="Index" asp-controller="Course" asp-route-id="@category.Name" class="btn btn-light">
+                                    <a asp-action="Index" asp-controller="Course" asp-route-name="@category.Name" class="btn btn-light">
                                         <i class="fa fa-reorder"></i>  <span class="ms-1 d-none d-sm-inline-block">See More</span>
                                     </a>
                                 </div>

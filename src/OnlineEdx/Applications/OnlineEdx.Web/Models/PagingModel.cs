@@ -81,8 +81,9 @@
                 else
                     ReturnValue = ReturnValue + "&nbsp;&nbsp;&nbsp;<span class='" + DisableClassName + "'>Next</span>";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                throw;
             }
             return (ReturnValue);
         }

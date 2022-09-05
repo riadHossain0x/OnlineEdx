@@ -20,8 +20,7 @@ namespace OnlineEdx.Web.Controllers
             model.PageIndex = (pn == 0) ? 1 : pn;
 
             await model.GetFilteredCourses();
-
-            model.PaginationRaw = PagingModel.SetPaging(model.PageIndex, 1, model.Courses.total,
+            model.PaginationRaw = PagingModel.SetPaging(model.PageIndex, 10, model.Courses.total,
                 "activeLink", Url.Action("Index", "Course"), "disableLink");
 
             return View(model);
