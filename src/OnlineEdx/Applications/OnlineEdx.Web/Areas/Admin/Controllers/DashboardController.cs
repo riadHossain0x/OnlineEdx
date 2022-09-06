@@ -12,12 +12,26 @@ namespace OnlineEdx.Web.Areas.Admin.Controllers
         {
         }
 
-        public async Task<IActionResult> Index(Guid id)
+        public IActionResult Index()
         {
-            var model = _scope.Resolve<DashboardModel>();
-            var datatableModel = new DataTablesAjaxRequestModel(Request);
-            await model.GetEnrolledUsers(datatableModel);
-            return View(model);
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetEnrollmentDetails()
+        {
+            try
+            {
+
+                var model = _scope.Resolve<DashboardModel>();
+                var datatableModel = new DataTablesAjaxRequestModel(Request);
+                var list = await model.GetEnrolledUsers(datatableModel);
+                return Json(list);
+            }
+            catch (Exception ex)
+            {
+                return Json(null);
+            }
         }
     }
 }

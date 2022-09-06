@@ -2,9 +2,7 @@
 using OnlineEdx.Infrastructure.Entities.Membership;
 using OnlineEdx.Infrastructure.Entities;
 using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Course;
-using ApplicationUserBO = OnlineEdx.Infrastructure.BusinessObjects.Membership.ApplicationUser;
 using AutoMapper;
-using NHibernate.Criterion;
 
 namespace OnlineEdx.Infrastructure.Services
 {
@@ -68,13 +66,14 @@ namespace OnlineEdx.Infrastructure.Services
                 CourseTitle = x.Course.Title,
                 CourseCategory = x.Course.Category.Name
             }).ToList();
-            //var applicationUsers = result.data.Select(x => _mapper.Map<ApplicationUserBO>(x)).ToList();
             return (result.total, result.totalDisplay, enrollStudents);
         }
     }
 
     public class EnrollStudent
     {
+        public virtual Guid ApplicationUserId { get; set; }
+        public virtual Guid CourseId { get; set; }
         public virtual string FirstName { get; set; } = null!;
         public virtual string LastName { get; set; } = null!;
         public virtual string Email { get; set; } = null!;
