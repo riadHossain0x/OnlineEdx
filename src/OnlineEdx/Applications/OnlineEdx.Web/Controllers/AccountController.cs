@@ -118,7 +118,7 @@ namespace OnlineEdx.Web.Controllers
                         var roles = await model.GetCurrentUserRolesAsync();
                         if (roles.Contains("Admin"))
                         {
-                            model.ReturnUrl ??= Url.Content("~/Admin/Dashboard");
+                            return RedirectToAction("Index", "Dashboard", new { Area = "admin" });
                         }
                         else
                         {

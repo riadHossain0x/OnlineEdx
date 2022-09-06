@@ -12,12 +12,11 @@ namespace OnlineEdx.Infrastructure.Seeds
             {
                 var rootUser = new ApplicationUser
                 {
-                    Id = Guid.Parse("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                     FirstName = "Admin",
                     LastName = "",
                     UserName = "admin@edx.com",
                     NormalizedUserName = "ADMIN@EDX.COM",
-                    Email = "admin@devpos.com",
+                    Email = "admin@edx.com",
                     NormalizedEmail = "ADMIN@EDX.COM",
                     LockoutEnabled = true,
                     SecurityStamp = Guid.NewGuid().ToString(),
