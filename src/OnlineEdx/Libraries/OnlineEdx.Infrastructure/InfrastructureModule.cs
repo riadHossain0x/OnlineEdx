@@ -29,6 +29,8 @@ namespace OnlineEdx.Infrastructure
                 .InstancePerLifetimeScope();
             builder.RegisterType<EnrollmentService>().As<IEnrollmentService>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<SeedService>().As<ISeedService>()
+                .InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

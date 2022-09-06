@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using NHibernate.Util;
 using OnlineEdx.Infrastructure.Entities.Membership;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineEdx.Infrastructure.Seeds
 {
@@ -16,7 +12,7 @@ namespace OnlineEdx.Infrastructure.Seeds
             {
                 var rootUser = new ApplicationUser
                 {
-                    //Id = Guid.Parse("8e445865-a24d-4543-a6c6-9443d048cdb9"),
+                    Id = Guid.Parse("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                     FirstName = "Admin",
                     LastName = "",
                     UserName = "admin@edx.com",

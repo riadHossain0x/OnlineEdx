@@ -1,6 +1,5 @@
 ﻿using NHibernate;
 using OnlineEdx.Data;
-using OnlineEdx.Infrastructure.Entities;
 using OnlineEdx.Infrastructure.Repositories;
 
 namespace OnlineEdx.Infrastructure.UnitOfWorks

@@ -10,6 +10,7 @@ using FluentNHibernate.AspNetCore.Identity;
 using OnlineEdx.Membership.Services;
 using OnlineEdx.Infrastructure.Entities.Membership;
 using Microsoft.AspNetCore.Identity;
+using OnlineEdx.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -88,6 +90,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSeedData();
 
 app.UseRouting();
 
