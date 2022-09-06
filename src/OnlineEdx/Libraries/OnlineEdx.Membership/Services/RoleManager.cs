@@ -6,6 +6,7 @@ namespace OnlineEdx.Membership.Services
     public interface IUserRoleManager
     {
         IList<string> GetRoles(ApplicationUser appUser);
+        void AddToRoles(ApplicationUser appUser, string[] roles);
     }
 
     public class UserRoleManager : IUserRoleManager
@@ -29,16 +30,23 @@ namespace OnlineEdx.Membership.Services
         {
             roles.ToList().ForEach(x =>
             {
+                var role = _edxUnitOfWork.RoleManagerRepository.Find(t => t.Role.Name == x)
+                .Select(x => new AppRole
+                {
+                    Id = x.Role.Id,
+                    Name = x.Role.Name,
+                    NormalizedName = x.Role.Name,
+                }).FirstOrDefault();
+
+                if (role == null)
+                    throw new InvalidOperationException($"{x} roll not found.");
+
                 var userRole = new UserRole
                 {
                     ApplicationUser = appUser,
-                    Role = new AppRole
-                    {
-                        Name = x,
-                        NormalizedName = x.ToUpper()
-                    }
+                    Role = role
                 };
-                _edxUnitOfWork.RoleManagerRepository.Add(userRole);
+                _edxUnitOfWork.RoleManagerRepository.Merge(userRole);
             });
         }
     }

@@ -45,7 +45,7 @@ namespace OnlineEdx.Membership.Services
             var result = await _userManager.CreateAsync(userEntity, user.Password);
             if (result.Succeeded)
             {
-                await RolesAsync(userEntity);
+                _userRoleManager.AddToRoles(userEntity, new string[] { "User" });
             }
             return result;
         }
@@ -82,11 +82,6 @@ namespace OnlineEdx.Membership.Services
         {
             return await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe,
                 lockoutOnFailure: false);
-        }
-
-        public async Task RolesAsync(ApplicationUser user)
-        {
-            await _userManager.AddToRolesAsync(user, new string[] { "User" });
         }
 
         public async Task SignInAsync(string email)
