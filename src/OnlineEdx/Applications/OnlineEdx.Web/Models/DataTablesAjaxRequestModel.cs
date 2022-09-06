@@ -59,7 +59,7 @@ namespace OnlineEdx.Web.Models
             get
             {
                 if (Length == 0)
-                    return 10;
+                    return 1;
                 else
                     return Length;
             }

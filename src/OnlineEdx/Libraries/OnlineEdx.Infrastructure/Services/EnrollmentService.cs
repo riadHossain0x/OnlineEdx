@@ -3,6 +3,7 @@ using OnlineEdx.Infrastructure.Entities.Membership;
 using OnlineEdx.Infrastructure.Entities;
 using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Course;
 using AutoMapper;
+using EnrollStudent = OnlineEdx.Infrastructure.BusinessObjects.EnrollStudent;
 
 namespace OnlineEdx.Infrastructure.Services
 {
@@ -60,6 +61,7 @@ namespace OnlineEdx.Infrastructure.Services
 
             var enrollStudents = result.data.Select(x => new EnrollStudent
             {
+                Id = x.Id,
                 FirstName = x.ApplicationUser.FirstName,
                 LastName = x.ApplicationUser.LastName,
                 Email = x.ApplicationUser.Email,
@@ -68,16 +70,16 @@ namespace OnlineEdx.Infrastructure.Services
             }).ToList();
             return (result.total, result.totalDisplay, enrollStudents);
         }
-    }
 
-    public class EnrollStudent
-    {
-        public virtual Guid ApplicationUserId { get; set; }
-        public virtual Guid CourseId { get; set; }
-        public virtual string FirstName { get; set; } = null!;
-        public virtual string LastName { get; set; } = null!;
-        public virtual string Email { get; set; } = null!;
-        public virtual string CourseTitle { get; set; } = null!;
-        public virtual string CourseCategory { get; set; } = null!; 
+        public void UnrollUser(int id)
+        {
+            var enrollItem = _edxUnitOfWork.EnrollmentRepository.Find(x => x.Id == id).FirstOrDefault();
+
+            if(enrollItem == null)
+                throw new InvalidOperationException("User with this course not found.");
+
+            _edxUnitOfWork.EnrollmentRepository.Remove(enrollItem);
+            _edxUnitOfWork.SaveChanges();
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["PageNav"] = "Dashboard";
+    ViewData["PageNav"] = "Summary";
 }
 @section Styles
 {
@@ -26,7 +26,7 @@
                     </table>
                 </div>
                 <!-- /.card-body -->
-                <partial name="_ModalPartial" />
+                <partial name="_UnrollModalPartial" />
             </div>
             <!-- /.card -->
         </div>
@@ -58,7 +58,7 @@
                 ]
             });
 
-            $('#course').on('click', '.show-bs-modal', function (event) {
+            $('#enrolledUsers').on('click', '.show-bs-modal', function (event) {
                 var id = $(this).data("id");
                 var modal = $("#modal-default");
                 modal.find('.modal-body p').text('Are you sure you want to unroll this user?');

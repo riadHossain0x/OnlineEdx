@@ -29,7 +29,7 @@ namespace OnlineEdx.Web.Areas.Admin.Models
             return new
             {
                 recordsTotal = data.total,
-                recordsFilterd = data.totalDisplay,
+                recordsFiltered = data.totalDisplay,
                 data = data.records.Select(x => new string[]
                 {
                     x.FirstName,
@@ -37,9 +37,14 @@ namespace OnlineEdx.Web.Areas.Admin.Models
                     x.Email,
                     x.CourseTitle,
                     x.CourseCategory,
-                    x.ApplicationUserId.ToString()
+                    x.Id.ToString()
                 })
             };
+        }
+
+        public void Unroll(int id)
+        {
+            _enrollmentService.UnrollUser(id);
         }
     }
 }

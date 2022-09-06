@@ -9,5 +9,6 @@ namespace OnlineEdx.Infrastructure.Services
         IList<Course> GetEnrolledCourses(Guid userId);
         Task<(int total, int totalDisplay, IList<EnrollStudent> records)> GetEnrolledUsersAsync(
             int pageIndex, int pageSize, string searchText, string orderBy);
+        void UnrollUser(int id);
     }
 }
