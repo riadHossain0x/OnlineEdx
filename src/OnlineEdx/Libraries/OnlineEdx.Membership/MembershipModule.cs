@@ -9,6 +9,7 @@ namespace OnlineEdx.Membership
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
+            builder.RegisterType<UserRoleManager>().As<IUserRoleManager>().InstancePerLifetimeScope();
             builder.RegisterType<ActionContextAccessor>().As<IActionContextAccessor>().SingleInstance();
             base.Load(builder);
         }

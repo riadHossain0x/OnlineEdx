@@ -17,6 +17,7 @@ namespace OnlineEdx.Membership.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserRoleManager _userRoleManager;
         private ISession _session;
         private readonly IUrlHelper _urlHelper;
         private readonly IActionContextAccessor _contextAccessor;
@@ -24,12 +25,14 @@ namespace OnlineEdx.Membership.Services
 
         public AccountService(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            IUserRoleManager userRoleManager,
             IUrlHelperFactory urlHelperFactory,
             IActionContextAccessor contextAccessor,
             IMapper mapper, ISession session)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userRoleManager = userRoleManager;
             _urlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext!);
             _contextAccessor = contextAccessor;
             _mapper = mapper;
@@ -50,7 +53,7 @@ namespace OnlineEdx.Membership.Services
         public async Task<IList<string>> GetCurrentUserRolesAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles = _userRoleManager.GetRolesAsync(user);
             return roles;
         }
 

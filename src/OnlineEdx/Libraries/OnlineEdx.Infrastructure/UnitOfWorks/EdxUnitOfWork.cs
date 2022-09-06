@@ -10,11 +10,12 @@ namespace OnlineEdx.Infrastructure.UnitOfWorks
             CourseRepository = new CourseRepository(_session);
             CategoryRepository = new CategoryRepository(_session);
             EnrollmentRepository = new EnrollmentRepository(_session);
+            RoleManagerRepository = new RoleManagerRepository(_session);
         }
 
         public ICourseRepository CourseRepository { get; }
-
         public ICategoryRepository CategoryRepository { get; }
         public IEnrollmentRepository EnrollmentRepository { get; }
+        public IRoleManagerRepository RoleManagerRepository { get; }
     }
 }

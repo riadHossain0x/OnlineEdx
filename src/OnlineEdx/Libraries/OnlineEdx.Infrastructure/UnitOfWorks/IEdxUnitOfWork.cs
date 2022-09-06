@@ -13,5 +13,6 @@ namespace OnlineEdx.Infrastructure.UnitOfWorks
         ICourseRepository CourseRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IEnrollmentRepository EnrollmentRepository { get; }
+        IRoleManagerRepository RoleManagerRepository { get; }
     }
 }

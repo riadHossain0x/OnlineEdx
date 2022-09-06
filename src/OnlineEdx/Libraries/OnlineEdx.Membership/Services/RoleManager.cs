@@ -1,15 +1,28 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using OnlineEdx.Infrastructure.Entities.Membership;
+﻿using OnlineEdx.Infrastructure.Entities.Membership;
+using OnlineEdx.Infrastructure.UnitOfWorks;
 
 namespace OnlineEdx.Membership.Services
 {
-    public class RoleManager : RoleManager<Role>
+    public interface IUserRoleManager
     {
-        public RoleManager(IRoleStore<Role> store, IEnumerable<IRoleValidator<Role>> roleValidators,
-            ILookupNormalizer keyNormalizer, IdentityErrorDescriber errors, ILogger<RoleManager<Role>> logger)
-            : base(store, roleValidators, keyNormalizer, errors, logger)
+        IList<string> GetRolesAsync(ApplicationUser appUser);
+    }
+
+    public class UserRoleManager : IUserRoleManager
+    {
+        private readonly IEdxUnitOfWork _edxUnitOfWork;
+
+        public UserRoleManager(IEdxUnitOfWork edxUnitOfWork)
         {
+            _edxUnitOfWork = edxUnitOfWork;
+        }
+
+        public IList<string> GetRolesAsync(ApplicationUser appUser)
+        {
+            var roles = _edxUnitOfWork.RoleManagerRepository.Find(x => x.ApplicationUser.Id == appUser.Id)
+                .Select(x => x.Role.Name).ToList();
+
+            return roles;
         }
     }
 }
