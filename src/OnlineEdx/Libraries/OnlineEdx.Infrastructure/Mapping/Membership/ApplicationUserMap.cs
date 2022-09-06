@@ -1,10 +1,5 @@
 ﻿using FluentNHibernate.AspNetCore.Identity.Mappings;
 using OnlineEdx.Infrastructure.Entities.Membership;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineEdx.Infrastructure.Mapping.Membership
 {

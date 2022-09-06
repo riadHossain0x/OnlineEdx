@@ -11,11 +11,9 @@ namespace OnlineEdx.Membership.Services
         Task<ApplicationUser> GetUserAsync();
         Task<SignInResult> PasswordSignInAsync(ApplicationUserBO user);
         Task<IList<string>> GetCurrentUserRolesAsync(string email);
-        Task RolesAsync(ApplicationUser user);
         Task SignInAsync(string email);
         Task SignOutAsync();
         bool IsAuthenticated();
         string GetUserId();
-        Task<IdentityResult> ResetPasswordAsync(ApplicationUserBO user);
     }
 }
