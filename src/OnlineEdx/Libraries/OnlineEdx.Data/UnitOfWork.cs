@@ -7,9 +7,9 @@ namespace OnlineEdx.Data
         protected ISession _session;
         private ITransaction _transaction = null!;
 
-        public UnitOfWork(IDataSessionFactory session)
+        public UnitOfWork(ISession session)
         {
-            _session = session.OpenSession();
+            _session = session;
         }
 
         public void SaveChanges()
