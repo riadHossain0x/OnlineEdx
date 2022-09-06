@@ -16,6 +16,5 @@ namespace OnlineEdx.Membership.Services
         Task SignOutAsync();
         bool IsAuthenticated();
         string GetUserId();
-        Task<IdentityResult> ResetPasswordAsync(ApplicationUserBO user);
     }
 }

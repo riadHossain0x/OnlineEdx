@@ -45,7 +45,7 @@ namespace OnlineEdx.Membership.Services
             var result = await _userManager.CreateAsync(userEntity, user.Password);
             if (result.Succeeded)
             {
-                //await RolesAsync(userEntity);
+                await RolesAsync(userEntity);
             }
             return result;
         }
@@ -53,7 +53,7 @@ namespace OnlineEdx.Membership.Services
         public async Task<IList<string>> GetCurrentUserRolesAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            var roles = _userRoleManager.GetRolesAsync(user);
+            var roles = _userRoleManager.GetRoles(user);
             return roles;
         }
 
@@ -82,12 +82,6 @@ namespace OnlineEdx.Membership.Services
         {
             return await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe,
                 lockoutOnFailure: false);
-        }
-
-        public async Task<IdentityResult> ResetPasswordAsync(ApplicationUserBO user)
-        {
-            return await _userManager.ResetPasswordAsync
-                (await _userManager.FindByIdAsync(user.Id.ToString()), user.Code, user.NewPassword);
         }
 
         public async Task RolesAsync(ApplicationUser user)
