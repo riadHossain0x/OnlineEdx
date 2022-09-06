@@ -1,3 +1,75 @@
 ﻿@{
-    ViewData["PageNav"] = "Dashboard";
+    ViewData["PageNav"] = "Summary";
+}
+@section Styles
+{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/admintheme/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body table-responsive px-2">
+                    <table id="enrolledUsers" class="table table-bordered table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Course Title</th>
+                                <th>Course Category</th>
+                                <th style="width:5%">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <partial name="_UnrollModalPartial" />
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+    @section Scripts{
+    <!-- DataTables -->
+    <script src="~/admintheme/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/admintheme/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+            $('#enrolledUsers').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/admin/dashboard/getenrollmentdetails",
+                },
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 5,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
+                                                                                            <i class='fa fa-trash-o'></i>
+                                                                                        </button>`;
+                        },
+
+                    }
+                ]
+            });
+
+            $('#enrolledUsers').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data("id");
+                var modal = $("#modal-default");
+                modal.find('.modal-body p').text('Are you sure you want to unroll this user?');
+                $("#deleteId").val(id);
+                $("#deleteForm").attr("action", "/admin/dashboard/unroll");
+                modal.modal('show');
+            });
+
+            $("#deleteButton").click(function () {
+                $("#deleteForm").submit();
+            });
+        });
+    </script>
 }

@@ -3,6 +3,7 @@ using OnlineEdx.Infrastructure.Entities.Membership;
 using OnlineEdx.Infrastructure.Entities;
 using CourseBO = OnlineEdx.Infrastructure.BusinessObjects.Course;
 using AutoMapper;
+using EnrollStudent = OnlineEdx.Infrastructure.BusinessObjects.EnrollStudent;
 
 namespace OnlineEdx.Infrastructure.Services
 {
@@ -49,6 +50,36 @@ namespace OnlineEdx.Infrastructure.Services
             var courseBO = _mapper.Map<IList<CourseBO>>(courseEO);
 
             return courseBO;
+        }
+
+        public async Task<(int total, int totalDisplay, IList<EnrollStudent> records)> GetEnrolledUsersAsync( 
+            int pageIndex, int pageSize, string searchText, string orderBy)
+        {
+            var result = await _edxUnitOfWork.EnrollmentRepository
+                .GetDynamicAsync(x => x.Course.Title.Contains(searchText) || x.ApplicationUser.FirstName.Contains(searchText) ||
+                x.ApplicationUser.LastName.Contains(searchText), orderBy, pageIndex, pageSize);
+
+            var enrollStudents = result.data.Select(x => new EnrollStudent
+            {
+                Id = x.Id,
+                FirstName = x.ApplicationUser.FirstName,
+                LastName = x.ApplicationUser.LastName,
+                Email = x.ApplicationUser.Email,
+                CourseTitle = x.Course.Title,
+                CourseCategory = x.Course.Category.Name
+            }).ToList();
+            return (result.total, result.totalDisplay, enrollStudents);
+        }
+
+        public void UnrollUser(int id)
+        {
+            var enrollItem = _edxUnitOfWork.EnrollmentRepository.Find(x => x.Id == id).FirstOrDefault();
+
+            if(enrollItem == null)
+                throw new InvalidOperationException("User with this course not found.");
+
+            _edxUnitOfWork.EnrollmentRepository.Remove(enrollItem);
+            _edxUnitOfWork.SaveChanges();
         }
     }
 }

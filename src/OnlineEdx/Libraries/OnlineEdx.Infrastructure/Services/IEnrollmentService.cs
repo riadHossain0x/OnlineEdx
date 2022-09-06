@@ -1,10 +1,5 @@
 ﻿using OnlineEdx.Infrastructure.BusinessObjects;
 using OnlineEdx.Infrastructure.Entities.Membership;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineEdx.Infrastructure.Services
 {
@@ -12,5 +7,8 @@ namespace OnlineEdx.Infrastructure.Services
     {
         void EnrollCourseAsync(Guid courseId, ApplicationUser user);
         IList<Course> GetEnrolledCourses(Guid userId);
+        Task<(int total, int totalDisplay, IList<EnrollStudent> records)> GetEnrolledUsersAsync(
+            int pageIndex, int pageSize, string searchText, string orderBy);
+        void UnrollUser(int id);
     }
 }
