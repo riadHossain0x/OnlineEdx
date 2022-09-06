@@ -37,7 +37,7 @@ builder.Services.AddIdentity<ApplicationUser, Role>()
     .ExtendConfiguration()
     .AddNHibernateStores(t => t.SetSessionAutoFlush(true))
     .AddUserManager<UserManager>()
-    .AddRoleManager<RoleManager>()
+    //.AddRoleManager<RoleManager>()
     .AddSignInManager<SignInManager>()
     .AddDefaultTokenProviders();
 
