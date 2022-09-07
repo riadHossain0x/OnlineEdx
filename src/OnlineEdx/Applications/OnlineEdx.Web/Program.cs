@@ -14,6 +14,8 @@ using OnlineEdx.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 //Autofac configuration
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
@@ -33,13 +35,14 @@ builder.Host.UseSerilog((ctx, lc) => lc
 //Automapper configuration
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped(t => new MsSQLSessionFactory().OpenSession());
+builder.Services.AddScoped(t => new MsSQLSessionFactory(connectionString).OpenSession());
 builder.Services.AddIdentity<ApplicationUser, Role>()
     .ExtendConfiguration()
     .AddNHibernateStores(t => t.SetSessionAutoFlush(true))
     .AddUserManager<UserManager>()
     .AddSignInManager<SignInManager>()
     .AddDefaultTokenProviders();
+
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
