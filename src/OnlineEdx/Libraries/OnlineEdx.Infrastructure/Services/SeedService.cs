@@ -52,6 +52,10 @@ namespace OnlineEdx.Infrastructure.Services
 
         private void AdminRole()
         {
+            var count = _session.Query<UserRole>().Where(t => t.Role.Name == "Admin").Count();
+            if (count > 0)
+                return;
+
             var appUser = _session.Query<ApplicationUser>().Where(t => t.UserName == "admin@edx.com").FirstOrDefault();
 
             if (appUser == null)

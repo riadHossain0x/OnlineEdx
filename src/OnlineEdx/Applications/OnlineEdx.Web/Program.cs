@@ -10,9 +10,11 @@ using FluentNHibernate.AspNetCore.Identity;
 using OnlineEdx.Membership.Services;
 using OnlineEdx.Infrastructure.Entities.Membership;
 using Microsoft.AspNetCore.Identity;
-using OnlineEdx.Web.Middlewares;
+using OnlineEdx.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 //Autofac configuration
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -33,13 +35,19 @@ builder.Host.UseSerilog((ctx, lc) => lc
 //Automapper configuration
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped(t => new MsSQLSessionFactory().OpenSession());
+builder.Services.AddScoped<ISeedService, SeedService>();
+builder.Services.AddScoped(t => new MsSQLSessionFactory(connectionString).OpenSession());
+
 builder.Services.AddIdentity<ApplicationUser, Role>()
     .ExtendConfiguration()
     .AddNHibernateStores(t => t.SetSessionAutoFlush(true))
     .AddUserManager<UserManager>()
     .AddSignInManager<SignInManager>()
     .AddDefaultTokenProviders();
+
+var seedService = builder.Services.BuildServiceProvider()
+    .GetService<ISeedService>();
+seedService!.Seeds();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -91,7 +99,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseSeedData();
+//app.UseSeedData();
 
 app.UseRouting();
 

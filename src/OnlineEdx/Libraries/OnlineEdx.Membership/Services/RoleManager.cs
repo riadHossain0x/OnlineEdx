@@ -20,7 +20,7 @@ namespace OnlineEdx.Membership.Services
 
         public IList<string> GetRoles(ApplicationUser appUser)
         {
-            var roles = _edxUnitOfWork.RoleManagerRepository.Find(x => x.ApplicationUser.Id == appUser.Id)
+            var roles = _edxUnitOfWork.UserRoleRepository.Find(x => x.ApplicationUser.Id == appUser.Id)
                 .Select(x => x.Role.Name).ToList();
 
             return roles;
@@ -30,23 +30,23 @@ namespace OnlineEdx.Membership.Services
         {
             roles.ToList().ForEach(x =>
             {
-                var role = _edxUnitOfWork.RoleManagerRepository.Find(t => t.Role.Name == x)
+                var role = _edxUnitOfWork.RoleRepository.Find(t => t.Name == x)
                 .Select(x => new AppRole
                 {
-                    Id = x.Role.Id,
-                    Name = x.Role.Name,
-                    NormalizedName = x.Role.Name,
+                    Id = x.Id,
+                    Name = x.Name,
+                    NormalizedName = x.Name.ToUpper(),
                 }).FirstOrDefault();
 
                 if (role == null)
-                    throw new InvalidOperationException($"{x} roll not found.");
+                    return;
 
                 var userRole = new UserRole
                 {
                     ApplicationUser = appUser,
                     Role = role
                 };
-                _edxUnitOfWork.RoleManagerRepository.Merge(userRole);
+                _edxUnitOfWork.UserRoleRepository.Merge(userRole);
             });
         }
     }
