@@ -122,9 +122,8 @@ namespace OnlineEdx.Web.Controllers
                         }
                         else
                         {
-                            model.ReturnUrl ??= Url.Content("~/Home");
+                            return RedirectToAction("Index", "Home");
                         }
-                        return LocalRedirect(model.ReturnUrl!);
                     }
                     else
                     {
