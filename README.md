@@ -22,12 +22,12 @@
 3. Manage Enrolled Students
 
 ## Technologies
-Asp.Net Core 6, Identity Core, MySql, NHibernate, 3 Layers architecture ( Presentation, Services, Data Access Layer )
+Asp.Net Core 6, Identity Core, MsSql, NHibernate, 3 Layers architecture ( Presentation, Services, Data Access Layer )
 
 ## Installation in 4 easy steps
 1. Clone the repository.
 2. Create database in MSSQL server.
-3. Change connection string in appsettings.json file according to the MSQL server.
+3. Change connection string in appsettings.json file according to the MsSQL server.
 4. Run the project and enjoy, thanks you.
 
 ## Login to admin
